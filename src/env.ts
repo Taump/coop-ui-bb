@@ -6,6 +6,10 @@ export const env = createEnv({
 
   client: {
     VITE_APP_TITLE: z.string().min(1).optional(),
+    VITE_TESTNET: z
+      .enum(['true', 'false'])
+      .optional()
+      .transform((v) => v === 'true'),
   },
 
   /**
