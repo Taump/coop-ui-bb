@@ -1,9 +1,14 @@
 import client from './obyte'
+import { env } from '#/app/env'
 
 let heartbeatInterval: ReturnType<typeof setInterval> | undefined
 
 export const bootstrap = async () => {
   console.log('connected to obyte hub')
+
+  client.justsaying('light/new_aa_to_watch', {
+    aa: env.VITE_AA_ADDRESS,
+  });
 
   heartbeatInterval = setInterval(() => {
     client.api.heartbeat()
