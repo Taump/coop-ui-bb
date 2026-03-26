@@ -1,14 +1,25 @@
-import client from './obyte'
-import { env } from '#/app/env'
+import client from './obyte';
+import { env } from '#/app/env';
+import { aaStateStore } from '#/shared/store/aa-state';
 
 let heartbeatInterval: ReturnType<typeof setInterval> | undefined
 
 export const bootstrap = async () => {
-  console.log('connected to obyte hub')
+  console.log('log: connected to obyte hub')
 
   client.justsaying('light/new_aa_to_watch', {
     aa: env.VITE_AA_ADDRESS,
   });
+
+  aaStateStore.setState((prev) => ({ ...prev, status: 'loading' }))
+
+  const vars = await client.api.getAaStateVars({
+    address: env.VITE_AA_ADDRESS,
+  })
+
+  aaStateStore.setState(() => ({ status: 'loaded', vars }))
+
+  console.log('log: vars loaded', Object.keys(vars).length)
 
   heartbeatInterval = setInterval(() => {
     client.api.heartbeat()
