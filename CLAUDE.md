@@ -158,3 +158,14 @@ Project follows [FSD](https://feature-sliced.design/) structure under `src/`:
 - Prettier: no semicolons, single quotes, trailing commas
 - ESLint: TanStack config with relaxed rules (no import ordering, no cycle checks, no require-await)
 - TypeScript strict mode enabled
+
+## Shared Utilities (`src/shared/lib/`)
+
+- **`encodeData(data)`** — Base64-кодирование объекта для передачи в Obyte deep-link (`base64data` параметр). Используй при формировании ссылок для кошелька.
+- **`generateLink({amount, aa, data, ...})`** — Генерирует `obyte:` deep-link для отправки транзакции в AA. Автоматически подставляет суффикс testnet/livenet. Используй для всех кнопок отправки транзакций (deposit, vote, claim, withdraw, replace, governance).
+- **`formatPeriod(periodEndTs)`** — Форматирует оставшееся время до unix-timestamp в человекочитаемую строку ("3 days 4h 12m"). Используй для отображения оставшегося времени lock-периода, governance challenging period и т.д.
+- **`getAllStateVarsByAddress(address)`** — Загружает все state vars AA с пагинацией. Используй для начальной загрузки состояния AA (bootstrap).
+- **`getExplorerUrl(value, type)`** — Генерирует URL на Obyte Explorer для адреса, транзакции или ассета. Используй для ссылок на explorer в UI.
+- **`openCustomProtocol({href, onProtocolMissing, ...})`** — Открывает `obyte:` deep-link с определением, установлен ли кошелёк. Специальная обработка для Mobile Safari. Используй для кнопок, которые открывают кошелёк Obyte.
+- **`toLocalString(value)`** — Форматирует число с локализованными разделителями (до 9 значащих цифр). Используй для отображения балансов и сумм COOP/GBYTE.
+- **`toOrdinal(n)`** — Добавляет английский порядковый суффикс (1st, 2nd, 3rd...). Используй для отображения позиций в рейтинге.

@@ -3,6 +3,7 @@ import { env } from '#/app/env'
 import { setCoopLoading, setCoopVars } from '#/entities/coop'
 import { setGovernanceLoading, setGovernanceVars } from '#/entities/governance'
 import { hasAssetMetadata, setAssetMetadata } from '#/entities/token'
+import { getAllStateVarsByAddress } from '#/shared/lib/getAllStateVarsByAddress'
 
 let heartbeatInterval: ReturnType<typeof setInterval> | undefined
 
@@ -17,9 +18,7 @@ export const bootstrap = async () => {
 
     setCoopLoading()
 
-    const vars = (await client.api.getAaStateVars({
-      address: env.VITE_AA_ADDRESS,
-    })) as Record<string, unknown>
+    const vars = await getAllStateVarsByAddress(env.VITE_AA_ADDRESS)
 
     console.info('log: coop vars loaded', Object.keys(vars).length)
 
@@ -41,9 +40,9 @@ export const bootstrap = async () => {
 
     setGovernanceLoading()
 
-    const governanceVars = (await client.api.getAaStateVars({
-      address: constants.governance_aa,
-    })) as Record<string, unknown>
+    const governanceVars = await getAllStateVarsByAddress(
+      constants.governance_aa,
+    )
 
     console.info(
       'log: governance vars loaded',
