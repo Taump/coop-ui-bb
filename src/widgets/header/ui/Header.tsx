@@ -3,6 +3,8 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 
 import { Button } from "#/shared/ui/button";
+import { Container } from "#/shared/ui/container";
+import { env } from "#/app/env";
 import { useWallet, clearWalletAddress } from "#/entities/user";
 import { ConnectWalletDialog } from "#/features/connect-wallet";
 
@@ -40,10 +42,15 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
+      <Container className="flex h-14 items-center justify-between">
         <div className="flex items-center gap-8">
           <Link to="/" className="text-lg font-bold">
             COOP
+            {env.VITE_TESTNET && (
+              <sup className="ml-0.5 text-[10px] font-normal text-muted-foreground">
+                testnet
+              </sup>
+            )}
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex">
@@ -76,7 +83,7 @@ export function Header() {
             )}
           </Button>
         </div>
-      </div>
+      </Container>
 
       {mobileOpen && (
         <nav className="flex flex-col gap-1 border-t px-4 py-3 md:hidden">
