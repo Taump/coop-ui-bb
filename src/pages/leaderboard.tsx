@@ -7,7 +7,7 @@ export const Route = createFileRoute("/leaderboard")({
 function Leaderboard() {
   return (
     <>
-      <h2 className="mb-4 text-lg font-semibold">Leaderboard</h2>
+      <h2 className="mb-4 text-2xl font-bold">Leaderboard</h2>
       <p className="text-muted-foreground">Coming soon.</p>
     </>
   );

@@ -7,7 +7,7 @@ export const Route = createFileRoute("/governance")({
 function Governance() {
   return (
     <>
-      <h2 className="mb-4 text-lg font-semibold">Governance</h2>
+      <h2 className="mb-4 text-2xl font-bold">Governance</h2>
       <p className="text-muted-foreground">Coming soon.</p>
     </>
   );
