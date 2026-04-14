@@ -13,5 +13,13 @@
   "wallet_description": "Установите {link}, если у вас его ещё нет, и вставьте свой адрес сюда.",
   "wallet_link_text": "кошелёк Obyte",
   "wallet_error_empty": "Введите адрес кошелька",
-  "wallet_error_invalid": "Неверный адрес Obyte"
+  "wallet_error_invalid": "Неверный адрес Obyte",
+  "leaderboard_title": "Рейтинг",
+  "leaderboard_col_rank": "#",
+  "leaderboard_col_address": "Адрес",
+  "leaderboard_col_balance": "Баланс",
+  "leaderboard_col_votes": "Голоса",
+  "leaderboard_empty": "Пользователей пока нет.",
+  "leaderboard_balance_tooltip": "Включает GBYTE, конвертированные в COOP по потолочной цене",
+  "leaderboard_you": "Вы"
 }

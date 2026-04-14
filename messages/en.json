@@ -13,5 +13,13 @@
   "wallet_description": "Install {link} if you don't have one yet, and copy/paste your address here.",
   "wallet_link_text": "Obyte wallet",
   "wallet_error_empty": "Enter your wallet address",
-  "wallet_error_invalid": "Invalid Obyte address"
+  "wallet_error_invalid": "Invalid Obyte address",
+  "leaderboard_title": "Leaderboard",
+  "leaderboard_col_rank": "#",
+  "leaderboard_col_address": "Address",
+  "leaderboard_col_balance": "Balance",
+  "leaderboard_col_votes": "Votes",
+  "leaderboard_empty": "No users yet.",
+  "leaderboard_balance_tooltip": "Includes GBYTE converted to COOP at the ceiling price",
+  "leaderboard_you": "You"
 }

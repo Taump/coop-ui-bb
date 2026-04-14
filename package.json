@@ -26,6 +26,7 @@
     "@tanstack/react-router": "latest",
     "@tanstack/react-router-devtools": "latest",
     "@tanstack/react-store": "latest",
+    "@tanstack/react-table": "^8.21.3",
     "@tanstack/router-plugin": "^1.132.0",
     "@tanstack/store": "latest",
     "class-variance-authority": "^0.7.1",

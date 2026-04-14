@@ -13,5 +13,13 @@
   "wallet_description": "Instala {link} si aún no tienes una, y copia/pega tu dirección aquí.",
   "wallet_link_text": "billetera Obyte",
   "wallet_error_empty": "Introduce tu dirección de billetera",
-  "wallet_error_invalid": "Dirección Obyte no válida"
+  "wallet_error_invalid": "Dirección Obyte no válida",
+  "leaderboard_title": "Clasificación",
+  "leaderboard_col_rank": "#",
+  "leaderboard_col_address": "Dirección",
+  "leaderboard_col_balance": "Saldo",
+  "leaderboard_col_votes": "Votos",
+  "leaderboard_empty": "Aún no hay usuarios.",
+  "leaderboard_balance_tooltip": "Incluye GBYTE convertidos a COOP al precio techo",
+  "leaderboard_you": "Tú"
 }
