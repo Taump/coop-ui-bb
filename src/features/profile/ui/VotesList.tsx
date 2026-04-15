@@ -1,10 +1,11 @@
 import type { FC } from "react";
-import { Link } from "@tanstack/react-router";
 
 import { Card, CardContent, CardHeader, CardTitle } from "#/shared/ui/card";
 import { toLocalString } from "#/shared/lib/toLocalString";
 
 import { useVotesReceived } from "#/entities/coop";
+
+import { UserDisplayName } from "./UserDisplayName";
 
 import * as m from "#/paraglide/messages";
 
@@ -28,14 +29,7 @@ export const VotesList: FC<VotesListProps> = ({ address }) => {
                 key={record.fromAddress}
                 className="flex items-center justify-between text-sm"
               >
-                <Link
-                  to="/user/$address"
-                  params={{ address: record.fromAddress }}
-                  className="font-mono underline-offset-4 hover:underline"
-                >
-                  {record.fromAddress.slice(0, 6)}...
-                  {record.fromAddress.slice(-4)}
-                </Link>
+                <UserDisplayName address={record.fromAddress} />
                 <span className="text-muted-foreground">
                   {toLocalString(record.votes)}
                 </span>
