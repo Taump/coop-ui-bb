@@ -61,6 +61,7 @@
   "profile_votes_list_title": "Votantes",
   "deposit_amount_label": "Cantidad",
   "deposit_lock_period_label": "Periodo de bloqueo",
+  "deposit_lock_days": "{days} días",
   "deposit_button": "Bloquear tokens",
   "deposit_button_with_amount": "Bloquear {amount} {symbol}",
   "deposit_error_positive": "Introduce una cantidad positiva",

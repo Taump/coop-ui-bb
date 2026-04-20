@@ -61,6 +61,7 @@
   "profile_votes_list_title": "Voters",
   "deposit_amount_label": "Amount",
   "deposit_lock_period_label": "Lock period",
+  "deposit_lock_days": "{days} days",
   "deposit_button": "Lock tokens",
   "deposit_button_with_amount": "Lock {amount} {symbol}",
   "deposit_error_positive": "Enter a positive amount",

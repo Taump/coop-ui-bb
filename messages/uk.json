@@ -61,6 +61,7 @@
   "profile_votes_list_title": "Голосувавші",
   "deposit_amount_label": "Сума",
   "deposit_lock_period_label": "Термін блокування",
+  "deposit_lock_days": "{days} днів",
   "deposit_button": "Заблокувати токени",
   "deposit_button_with_amount": "Заблокувати {amount} {symbol}",
   "deposit_error_positive": "Введіть додатну суму",

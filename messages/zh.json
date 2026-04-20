@@ -61,6 +61,7 @@
   "profile_votes_list_title": "投票者",
   "deposit_amount_label": "金额",
   "deposit_lock_period_label": "锁定期限",
+  "deposit_lock_days": "{days} 天",
   "deposit_button": "锁定代币",
   "deposit_button_with_amount": "锁定 {amount} {symbol}",
   "deposit_error_positive": "请输入正数金额",

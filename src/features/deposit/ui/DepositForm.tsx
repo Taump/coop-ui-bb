@@ -1,11 +1,8 @@
 import { useRef, useMemo, useEffect } from "react";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
-import { CalendarIcon } from "lucide-react";
-import type { DateRange } from "react-day-picker";
 
 import { Input } from "#/shared/ui/input";
-import { Button } from "#/shared/ui/button";
 import { Field, FieldError, FieldLabel } from "#/shared/ui/field";
 import {
   Select,
@@ -14,8 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "#/shared/ui/select";
-import { Popover, PopoverContent, PopoverTrigger } from "#/shared/ui/popover";
-import { Calendar } from "#/shared/ui/calendar";
+import { Slider } from "#/shared/ui/slider";
 import { diffDays } from "#/shared/lib/diffDays";
 import { formatDateShort } from "#/shared/lib/formatDateShort";
 import { tooManyDecimals } from "#/shared/lib/tooManyDecimals";
@@ -31,7 +27,6 @@ import {
   MAX_AMOUNT,
   getToday,
   getMinDate,
-  getMaxDate,
 } from "../lib/constants";
 import { DepositDescription } from "./DepositDescription";
 import { DepositMeta } from "./DepositMeta";
@@ -235,45 +230,38 @@ export function DepositForm() {
         {/* Lock period */}
         <form.Field name="unlockDate">
           {(field) => {
-            const range: DateRange = {
-              from: getToday(),
-              to: field.state.value,
+            const today = getToday();
+            const minDays = diffDays(today, effectiveMinDate);
+            const maxDays = MAX_TERM_DAYS;
+            const currentDays = Math.max(
+              minDays,
+              Math.min(maxDays, diffDays(today, field.state.value)),
+            );
+
+            const handleSliderChange = (values: number[]) => {
+              const days = values[0];
+              const newDate = new Date(today);
+              newDate.setDate(today.getDate() + days);
+              field.handleChange(newDate);
             };
 
             return (
               <Field>
-                <FieldLabel>{m.deposit_lock_period_label()}</FieldLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className="w-full justify-start text-left font-normal"
-                    >
-                      <CalendarIcon className="mr-2 size-4 text-muted-foreground" />
-                      <span>
-                        {formatDateShort(getToday())} –{" "}
-                        {formatDateShort(field.state.value)}
-                      </span>
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="range"
-                      selected={range}
-                      onSelect={(newRange) => {
-                        if (newRange?.to) {
-                          field.handleChange(newRange.to);
-                        }
-                      }}
-                      disabled={[
-                        { before: effectiveMinDate },
-                        { after: getMaxDate() },
-                      ]}
-                      defaultMonth={field.state.value}
-                      numberOfMonths={1}
-                    />
-                  </PopoverContent>
-                </Popover>
+                <div className="flex items-center justify-between">
+                  <FieldLabel>{m.deposit_lock_period_label()}</FieldLabel>
+                  <span className="text-sm text-muted-foreground">
+                    {m.deposit_lock_days({ days: String(currentDays) })} —{" "}
+                    {formatDateShort(field.state.value)}
+                  </span>
+                </div>
+                <Slider
+                  value={[currentDays]}
+                  min={minDays}
+                  max={maxDays}
+                  step={1}
+                  onValueChange={handleSliderChange}
+                  disabled={!isLoaded}
+                />
               </Field>
             );
           }}
