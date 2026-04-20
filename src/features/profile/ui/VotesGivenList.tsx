@@ -5,19 +5,19 @@ import { Separator } from "#/shared/ui/separator";
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { formatDateShort } from "#/shared/lib/formatDateShort";
 
-import { useVotesReceived } from "#/entities/coop";
+import { useVotesGiven } from "#/entities/coop";
 import { useAttestations } from "#/entities/attestation";
 
 import { UserDisplayName } from "./UserDisplayName";
 
 import * as m from "#/paraglide/messages";
 
-interface VotesListProps {
+interface VotesGivenListProps {
   address: string;
 }
 
-export const VotesList: FC<VotesListProps> = ({ address }) => {
-  const voteRecords = useVotesReceived(address);
+export const VotesGivenList: FC<VotesGivenListProps> = ({ address }) => {
+  const voteRecords = useVotesGiven(address);
   const { data: attestations } = useAttestations(address);
   const rawName =
     attestations?.displayName ??
@@ -27,17 +27,17 @@ export const VotesList: FC<VotesListProps> = ({ address }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{m.profile_votes_list_title({ name })}</CardTitle>
+        <CardTitle>{m.profile_votes_given_title({ name })}</CardTitle>
       </CardHeader>
       <CardContent>
         {voteRecords.length > 0 ? (
           <div className="grid gap-2">
             {voteRecords.map((record, i) => (
-              <Fragment key={record.fromAddress}>
+              <Fragment key={record.toAddress}>
                 {i > 0 && <Separator />}
                 <div className="flex items-center justify-between gap-2 text-sm">
                   <div className="flex flex-col">
-                    <UserDisplayName address={record.fromAddress} />
+                    <UserDisplayName address={record.toAddress} />
                     <span className="text-xs text-muted-foreground">
                       {formatDateShort(new Date(record.ts * 1000))}
                     </span>
@@ -51,7 +51,7 @@ export const VotesList: FC<VotesListProps> = ({ address }) => {
           </div>
         ) : (
           <p className="py-4 text-center text-muted-foreground">
-            {m.profile_votes_empty()}
+            {m.profile_votes_given_empty()}
           </p>
         )}
       </CardContent>

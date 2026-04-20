@@ -66,6 +66,8 @@
   "vote_self": "Голос за себя добавляется автоматически",
   "vote_connect_wallet": "Добавьте кошелёк для голосования",
   "profile_votes_list_title": "Голосовавшие за {name}",
+  "profile_votes_given_title": "Голоса {name}",
+  "profile_votes_given_empty": "Голосов ещё не было.",
   "deposit_amount_label": "Сумма",
   "deposit_lock_period_label": "Срок блокировки",
   "deposit_lock_days": "{days} дней",

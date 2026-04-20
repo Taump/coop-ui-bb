@@ -66,6 +66,8 @@
   "vote_self": "Self-vote is automatic",
   "vote_connect_wallet": "Add wallet to vote",
   "profile_votes_list_title": "Voters for {name}",
+  "profile_votes_given_title": "{name}'s votes",
+  "profile_votes_given_empty": "No votes cast yet.",
   "deposit_amount_label": "Amount",
   "deposit_lock_period_label": "Lock period",
   "deposit_lock_days": "{days} days",

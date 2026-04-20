@@ -66,6 +66,8 @@
   "vote_self": "Голос за себе додається автоматично",
   "vote_connect_wallet": "Додайте гаманець для голосування",
   "profile_votes_list_title": "Голосувавші за {name}",
+  "profile_votes_given_title": "Голоси {name}",
+  "profile_votes_given_empty": "Голосів ще не було.",
   "deposit_amount_label": "Сума",
   "deposit_lock_period_label": "Термін блокування",
   "deposit_lock_days": "{days} днів",

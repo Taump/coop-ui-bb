@@ -11,6 +11,7 @@ import {
   RewardsCard,
   VotesCard,
   VotesList,
+  VotesGivenList,
   ProfileSkeleton,
 } from "#/features/profile";
 import { VoteButton } from "#/features/voting";
@@ -87,6 +88,9 @@ function UserProfile() {
 
         <div className="col-span-6 lg:col-span-3">
           <VotesList address={address} />
+        </div>
+        <div className="col-span-6 lg:col-span-3">
+          <VotesGivenList address={address} />
         </div>
       </div>
     </div>

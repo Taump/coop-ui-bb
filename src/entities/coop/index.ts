@@ -12,3 +12,5 @@ export { getEligibility } from "./lib/getEligibility";
 export type { Eligibility } from "./lib/getEligibility";
 export { useVotesReceived } from "./model/useVotesReceived";
 export type { VoteRecord } from "./model/useVotesReceived";
+export { useVotesGiven } from "./model/useVotesGiven";
+export type { VoteGivenRecord } from "./model/useVotesGiven";
