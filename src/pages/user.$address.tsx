@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import obyte from "obyte";
 import * as m from "#/paraglide/messages";
 
 import { useCoopState } from "#/entities/coop";
+import type { CoopUser } from "#/entities/coop";
 import { useAssetInfo } from "#/entities/token";
 import {
   ProfileHeader,
@@ -23,12 +25,12 @@ function UserProfile() {
   const { coopDecimals, gbyteDecimals, coopSymbol, gbyteSymbol } = useAssetInfo(
     constants?.asset,
   );
-  const user = getUser(address);
   const isLoaded = status === "loaded";
+  const isValidAddress = obyte.utils.isValidAddress(address);
 
   if (!isLoaded) return <ProfileSkeleton />;
 
-  if (!user) {
+  if (!isValidAddress) {
     return (
       <div className="py-12 text-center">
         <h2 className="text-2xl font-bold">{m.profile_not_found()}</h2>
@@ -38,6 +40,20 @@ function UserProfile() {
       </div>
     );
   }
+
+  const defaultUser: CoopUser = {
+    balance: 0,
+    bytes_balance: 0,
+    total_balance: 0,
+    unlock_date: false,
+    reg_date: "",
+    reg_ts: 0,
+    last_ts: 0,
+    last_locked_emissions: 0,
+    last_liquid_emissions: 0,
+  };
+
+  const user = getUser(address) ?? defaultUser;
 
   return (
     <div className="space-y-10">
