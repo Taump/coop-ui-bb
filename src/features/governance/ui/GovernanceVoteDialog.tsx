@@ -2,6 +2,7 @@ import { useState, useReducer, useEffect, useRef } from "react";
 import { z } from "zod";
 import obyte from "obyte";
 import { Plus, X } from "lucide-react";
+import * as m from "#/paraglide/messages";
 
 import { Button } from "#/shared/ui/button";
 import { Input } from "#/shared/ui/input";
@@ -16,6 +17,7 @@ import {
 import { QRButton } from "#/shared/ui/qr-button";
 import type { ParsedGovernanceParam } from "#/entities/governance";
 import { formatParamName } from "#/shared/lib/formatParamName";
+import { getParamDescription } from "#/shared/lib/getParamDescription";
 
 import { buildVoteLink } from "../lib/buildGovernanceLink";
 import {
@@ -26,25 +28,32 @@ import {
 
 // --- Zod schemas ---
 
-const percentSchema = z
-  .string()
-  .min(1, "Required")
-  .refine((v) => !isNaN(Number(v)), "Must be a number")
-  .refine(
-    (v) => Number(v) >= 0 && Number(v) <= 100,
-    "Must be between 0 and 100",
-  );
+function buildSchemas() {
+  const percentSchema = z
+    .string()
+    .min(1, m.governance_error_required())
+    .refine((v) => !isNaN(Number(v)), m.governance_error_number())
+    .refine(
+      (v) => Number(v) >= 0 && Number(v) <= 100,
+      m.governance_error_percent_range(),
+    );
 
-const amountSchema = z
-  .string()
-  .min(1, "Required")
-  .refine((v) => !isNaN(Number(v)), "Must be a number")
-  .refine((v) => Number(v) >= 0, "Must be non-negative");
+  const amountSchema = z
+    .string()
+    .min(1, m.governance_error_required())
+    .refine((v) => !isNaN(Number(v)), m.governance_error_number())
+    .refine((v) => Number(v) >= 0, m.governance_error_non_negative());
 
-const addressSchema = z
-  .string()
-  .min(1, "Required")
-  .refine((v) => obyte.utils.isValidAddress(v.trim()), "Invalid Obyte address");
+  const addressSchema = z
+    .string()
+    .min(1, m.governance_error_required())
+    .refine(
+      (v) => obyte.utils.isValidAddress(v.trim()),
+      m.governance_error_invalid_address(),
+    );
+
+  return { percentSchema, amountSchema, addressSchema };
+}
 
 // --- Address list reducer ---
 
@@ -157,7 +166,7 @@ function AddressListInput({
           <div className="flex flex-1 flex-col gap-1">
             <Input
               type="text"
-              placeholder="Address"
+              placeholder={m.governance_dialog_address_placeholder()}
               value={addr}
               readOnly={readOnly}
               tabIndex={readOnly ? -1 : undefined}
@@ -191,7 +200,7 @@ function AddressListInput({
           className="self-start"
         >
           <Plus className="mr-1 size-3" />
-          Add address
+          {m.governance_dialog_add_address()}
         </Button>
       )}
     </div>
@@ -246,6 +255,8 @@ export function GovernanceVoteDialog({
     }
   }, [open, initialValue, param.def, coopDecimals]);
 
+  const { percentSchema, amountSchema, addressSchema } = buildSchemas();
+
   // Validation — show errors only when field is non-empty
   let error: string | null = null;
   let addressErrors: (string | null)[] = [];
@@ -273,7 +284,7 @@ export function GovernanceVoteDialog({
   } else {
     const hasInput = addresses.some((a) => a.trim() !== "");
     addressErrors = addresses.map((addr) => {
-      if (!addr.trim()) return hasInput ? "Required" : null;
+      if (!addr.trim()) return hasInput ? m.governance_error_required() : null;
       const result = addressSchema.safeParse(addr);
       return result.success ? null : result.error.issues[0].message;
     });
@@ -298,10 +309,18 @@ export function GovernanceVoteDialog({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Change {formatParamName(param.def.name)}</DialogTitle>
-          <DialogDescription>{param.def.description}</DialogDescription>
+          <DialogTitle>
+            {m.governance_dialog_title({
+              name: formatParamName(param.def.name),
+            })}
+          </DialogTitle>
+          <DialogDescription>
+            {getParamDescription(param.def.name)}
+          </DialogDescription>
           <p className="text-sm">
-            <span className="text-muted-foreground">Current value: </span>
+            <span className="text-muted-foreground">
+              {m.governance_param_current_value()}{" "}
+            </span>
             <span className="font-medium">
               {formatParamValue(
                 param.currentValue,
@@ -354,7 +373,7 @@ export function GovernanceVoteDialog({
             disabled={!href}
             size="sm"
           >
-            Change
+            {m.governance_dialog_change()}
           </QRButton>
         </DialogFooter>
       </DialogContent>

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Info } from "lucide-react";
+import * as m from "#/paraglide/messages";
 
 import { formatParamName } from "#/shared/lib/formatParamName";
+import { getParamDescription } from "#/shared/lib/getParamDescription";
 
 import {
   Card,
@@ -99,13 +101,15 @@ export function GovernanceParamCard({
                     <Info className="size-3.5 text-muted-foreground" />
                   </TooltipTrigger>
                   <TooltipContent className="max-w-xs">
-                    <p className="text-xs">{def.description}</p>
+                    <p className="text-xs">{getParamDescription(def.name)}</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
             </div>
             <span className="text-sm">
-              <span className="text-muted-foreground">Current value: </span>
+              <span className="text-muted-foreground">
+                {m.governance_param_current_value()}{" "}
+              </span>
               <span className="font-medium">{formattedCurrent}</span>
             </span>
           </div>
@@ -114,7 +118,9 @@ export function GovernanceParamCard({
         <CardContent className="flex-1 space-y-3 pb-3">
           {userChoice !== undefined && (
             <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground">Your vote</span>
+              <span className="text-muted-foreground">
+                {m.governance_param_your_vote()}
+              </span>
               <span className="font-medium">
                 {formatParamValue(userChoice, def, coopDecimals, coopSymbol)}
               </span>
@@ -124,7 +130,9 @@ export function GovernanceParamCard({
           {hasLeader && (
             <div className="rounded-md bg-muted/50 p-2.5 text-sm">
               <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">Leader</span>
+                <span className="text-muted-foreground">
+                  {m.governance_param_leader()}
+                </span>
                 <span className="font-medium">
                   {formatParamValue(leaderValue, def, coopDecimals, coopSymbol)}
                 </span>
@@ -133,7 +141,7 @@ export function GovernanceParamCard({
                 {challengeExpired ? (
                   <>
                     <span className="text-xs text-muted-foreground">
-                      Ready to commit
+                      {m.governance_param_ready_to_commit()}
                     </span>
                     <QRButton
                       href={commitHref ?? ""}
@@ -141,14 +149,14 @@ export function GovernanceParamCard({
                       size="xs"
                       variant="link"
                     >
-                      Commit
+                      {m.governance_param_commit()}
                     </QRButton>
                   </>
                 ) : (
                   challengingPeriodEndTs && (
                     <>
                       <span className="text-xs text-muted-foreground">
-                        Challenge ends in
+                        {m.governance_param_challenge_ends_in()}
                       </span>
                       <span className="text-xs font-medium">
                         <Countdown endTs={challengingPeriodEndTs} />
@@ -166,10 +174,10 @@ export function GovernanceParamCard({
                 <thead>
                   <tr className="text-xs text-muted-foreground">
                     <th className="border-b border-border px-3 py-2 text-left font-medium">
-                      Value
+                      {m.governance_param_col_value()}
                     </th>
                     <th className="border-b border-border px-3 py-2 text-right font-medium">
-                      Support
+                      {m.governance_param_col_support()}
                     </th>
                     <th className="border-b border-border px-3 py-2 text-right font-medium" />
                   </tr>
@@ -197,7 +205,7 @@ export function GovernanceParamCard({
                           disabled={!address}
                           className="cursor-pointer text-xs text-foreground underline underline-offset-4 hover:text-muted-foreground disabled:pointer-events-none disabled:opacity-50"
                         >
-                          vote for this value
+                          {m.governance_param_vote_for_value()}
                         </button>
                       </td>
                     </tr>
@@ -214,7 +222,7 @@ export function GovernanceParamCard({
             disabled={!address}
             className="cursor-pointer text-sm font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground disabled:pointer-events-none disabled:opacity-50"
           >
-            suggest another value
+            {m.governance_param_suggest_value()}
           </button>
         </CardFooter>
       </Card>

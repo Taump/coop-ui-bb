@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import * as m from "#/paraglide/messages";
 
 import { formatPeriod } from "#/shared/lib/formatPeriod";
 
@@ -11,7 +12,7 @@ export function Countdown({ endTs }: { endTs: number }) {
   }, [endTs]);
 
   const now = Math.floor(Date.now() / 1000);
-  if (now >= endTs) return <span>Expired</span>;
+  if (now >= endTs) return <span>{m.governance_countdown_expired()}</span>;
 
   return <span>{formatPeriod(endTs)}</span>;
 }

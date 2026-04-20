@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import * as m from "#/paraglide/messages";
 
 import { useWallet } from "#/entities/user";
 import { useCoopState } from "#/entities/coop";
@@ -25,20 +26,30 @@ function Governance() {
   const governanceAa = constants?.governance_aa;
   const isLoaded = coopStatus === "loaded" && govStatus === "loaded";
 
+  const introParts = m
+    .governance_connect_wallet_intro({ wallet: "[WALLET]" })
+    .split("[WALLET]");
+
   return (
     <>
-      <h2 className="mb-6 text-2xl font-bold">Governance</h2>
+      <h2 className="mb-6 text-2xl font-bold">{m.nav_governance()}</h2>
       <div className="flex flex-col gap-8">
         {isLoaded ? (
           <GovernanceProfile
             connectWallet={
               <>
-                <ConnectWalletDialog>
-                  <button className="cursor-pointer font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground">
-                    Add wallet
-                  </button>
-                </ConnectWalletDialog>{" "}
-                to see your voting power and vote on parameter changes.
+                {introParts.map((part, i) => (
+                  <span key={i}>
+                    {i > 0 && (
+                      <ConnectWalletDialog>
+                        <button className="cursor-pointer font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground">
+                          {m.wallet_add()}
+                        </button>
+                      </ConnectWalletDialog>
+                    )}
+                    {part}
+                  </span>
+                ))}
               </>
             }
           />
