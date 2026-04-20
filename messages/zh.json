@@ -91,5 +91,6 @@
   "how_it_works_emission_title": "每日发行",
   "how_it_works_emission_desc": "每天铸造新的 COOP — 锁定奖励增加您的余额，流动奖励可领取。",
   "how_it_works_vote_title": "投票并赚取",
-  "how_it_works_vote_desc": "为有用的贡献者投票。锁定越多 — 投票越强。投票 3 个月后过期。"
+  "how_it_works_vote_desc": "为有用的贡献者投票。锁定越多 — 投票越强。投票 3 个月后过期。",
+  "footer_built_on": "基于 {obyte} 构建"
 }
