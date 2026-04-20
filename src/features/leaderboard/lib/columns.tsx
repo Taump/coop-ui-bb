@@ -1,6 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { Link } from "@tanstack/react-router";
-import { ArrowUpDown, ArrowUp, ArrowDown, Info } from "lucide-react";
+import { ArrowDown, Info } from "lucide-react";
 import * as m from "#/paraglide/messages";
 
 import { toLocalString } from "#/shared/lib/toLocalString";
@@ -47,9 +47,11 @@ function AddressCell({ address, isYou }: { address: string; isYou: boolean }) {
 }
 
 function SortIcon({ isSorted }: { isSorted: false | "asc" | "desc" }) {
-  if (isSorted === "asc") return <ArrowUp className="ml-1 inline size-4" />;
-  if (isSorted === "desc") return <ArrowDown className="ml-1 inline size-4" />;
-  return <ArrowUpDown className="ml-1 inline size-4 opacity-50" />;
+  return (
+    <ArrowDown
+      className={`ml-1 inline size-4 ${isSorted === "desc" ? "" : "opacity-50"}`}
+    />
+  );
 }
 
 export function getColumns({
@@ -93,7 +95,9 @@ export function getColumns({
       header: ({ column }) => (
         <button
           className="flex cursor-pointer items-center"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => {
+            if (column.getIsSorted() !== "desc") column.toggleSorting(true);
+          }}
         >
           {m.leaderboard_col_balance()}
           <TooltipProvider>
@@ -135,7 +139,9 @@ export function getColumns({
       header: ({ column }) => (
         <button
           className="flex cursor-pointer items-center"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => {
+            if (column.getIsSorted() !== "desc") column.toggleSorting(true);
+          }}
         >
           {m.leaderboard_col_votes()}
           <SortIcon isSorted={column.getIsSorted()} />
