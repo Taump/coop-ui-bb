@@ -47,21 +47,20 @@ function FeaturesSection() {
         <div className="mx-auto w-full max-w-5xl px-6">
           <div className="text-center">
             <span className="text-primary font-mono text-sm uppercase">
-              How it works
+              {m.how_it_works_label()}
             </span>
             <h2 className="text-foreground mt-4 text-3xl font-semibold md:text-4xl">
-              Lock, vote, earn
+              {m.how_it_works_title()}
             </h2>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
             <Card className="grid grid-rows-[auto_1fr] gap-6 rounded-2xl border border-border/50 p-6 shadow-lg shadow-black/10">
               <div className="text-balance">
                 <h3 className="text-foreground font-semibold">
-                  Lock tokens
+                  {m.how_it_works_lock_title()}
                 </h3>
                 <p className="text-muted-foreground mt-2 text-sm">
-                  Lock COOP or GBYTE for 1+ year to earn voting power and
-                  emission share.
+                  {m.how_it_works_lock_desc()}
                 </p>
               </div>
               <KitIllustration />
@@ -70,11 +69,10 @@ function FeaturesSection() {
             <Card className="grid grid-rows-[auto_1fr] gap-6 rounded-2xl border border-border/50 p-6 shadow-lg shadow-black/10">
               <div className="text-balance">
                 <h3 className="text-foreground font-semibold">
-                  Daily Emission
+                  {m.how_it_works_emission_title()}
                 </h3>
                 <p className="text-muted-foreground mt-2 text-sm">
-                  New COOP is minted daily — locked rewards grow your balance,
-                  liquid rewards are claimable.
+                  {m.how_it_works_emission_desc()}
                 </p>
               </div>
               <ScheduleIllustation />
@@ -82,10 +80,11 @@ function FeaturesSection() {
 
             <Card className="md:col-span-2 grid gap-6 overflow-hidden rounded-2xl border border-border/50 p-6 shadow-lg shadow-black/10 md:grid-cols-2">
               <div className="text-balance self-center">
-                <h3 className="text-foreground font-semibold">Vote & Earn</h3>
+                <h3 className="text-foreground font-semibold">
+                  {m.how_it_works_vote_title()}
+                </h3>
                 <p className="text-muted-foreground mt-2 text-sm">
-                  Vote for useful contributors. Bigger lock — stronger vote.
-                  Votes expire in 3 months.
+                  {m.how_it_works_vote_desc()}
                 </p>
               </div>
               <div className="-mb-6 -mr-6 md:translate-y-4">

@@ -83,5 +83,13 @@
   "deposit_banner_short_lock": "Extiende tu periodo de bloqueo a al menos 1 año para ser elegible.",
   "deposit_banner_both": "Deposita tokens y bloquéalos por al menos 1 año para ser elegible.",
   "deposit_banner_cta": "Bloquear tokens",
-  "deposit_dialog_title": "Bloquear tokens"
+  "deposit_dialog_title": "Bloquear tokens",
+  "how_it_works_label": "Cómo funciona",
+  "how_it_works_title": "Bloquea, vota, gana",
+  "how_it_works_lock_title": "Bloquear tokens",
+  "how_it_works_lock_desc": "Bloquea COOP o GBYTE por al menos 1 año para obtener poder de voto y parte de la emisión.",
+  "how_it_works_emission_title": "Emisión diaria",
+  "how_it_works_emission_desc": "Se emiten nuevos COOP diariamente — las recompensas bloqueadas aumentan tu saldo, las líquidas se pueden reclamar.",
+  "how_it_works_vote_title": "Votar y ganar",
+  "how_it_works_vote_desc": "Vota por contribuidores útiles. Más bloqueo — voto más fuerte. Los votos expiran en 3 meses."
 }

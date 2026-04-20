@@ -83,5 +83,13 @@
   "deposit_banner_short_lock": "将锁定期限延长至至少1年以成为合格参与者。",
   "deposit_banner_both": "存入代币并锁定至少1年以成为合格参与者。",
   "deposit_banner_cta": "锁定代币",
-  "deposit_dialog_title": "锁定代币"
+  "deposit_dialog_title": "锁定代币",
+  "how_it_works_label": "工作原理",
+  "how_it_works_title": "锁定、投票、赚取",
+  "how_it_works_lock_title": "锁定代币",
+  "how_it_works_lock_desc": "锁定 COOP 或 GBYTE 至少 1 年，以获得投票权和发行份额。",
+  "how_it_works_emission_title": "每日发行",
+  "how_it_works_emission_desc": "每天铸造新的 COOP — 锁定奖励增加您的余额，流动奖励可领取。",
+  "how_it_works_vote_title": "投票并赚取",
+  "how_it_works_vote_desc": "为有用的贡献者投票。锁定越多 — 投票越强。投票 3 个月后过期。"
 }
