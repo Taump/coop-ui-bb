@@ -20,11 +20,8 @@ import { formatParamName } from "#/shared/lib/formatParamName";
 import { getParamDescription } from "#/shared/lib/getParamDescription";
 
 import { buildVoteLink } from "../lib/buildGovernanceLink";
-import {
-  formatParamValue,
-  toDisplayValue,
-  toAAValue,
-} from "../lib/formatParamValue";
+import { toDisplayValue, toAAValue } from "../lib/formatParamValue";
+import { ParamValue } from "./ParamValue";
 
 // --- Zod schemas ---
 
@@ -322,12 +319,12 @@ export function GovernanceVoteDialog({
               {m.governance_param_current_value()}{" "}
             </span>
             <span className="font-medium">
-              {formatParamValue(
-                param.currentValue,
-                param.def,
-                coopDecimals,
-                coopSymbol,
-              )}
+              <ParamValue
+                value={param.currentValue}
+                def={param.def}
+                coopDecimals={coopDecimals}
+                coopSymbol={coopSymbol}
+              />
             </span>
           </p>
         </DialogHeader>

@@ -23,10 +23,10 @@ import { QRButton } from "#/shared/ui/qr-button";
 import { toLocalString } from "#/shared/lib/toLocalString";
 import type { ParsedGovernanceParam } from "#/entities/governance";
 
-import { formatParamValue } from "../lib/formatParamValue";
 import { buildCommitLink } from "../lib/buildGovernanceLink";
 import { Countdown } from "./Countdown";
 import { GovernanceVoteDialog } from "./GovernanceVoteDialog";
+import { ParamValue } from "./ParamValue";
 
 interface GovernanceParamCardProps {
   param: ParsedGovernanceParam;
@@ -61,13 +61,6 @@ export function GovernanceParamCard({
     setDialogInitialValue(initialValue);
     setDialogOpen(true);
   };
-
-  const formattedCurrent = formatParamValue(
-    currentValue,
-    def,
-    coopDecimals,
-    coopSymbol,
-  );
 
   const hasLeader =
     leader !== undefined && String(leader) !== String(currentValue);
@@ -110,7 +103,14 @@ export function GovernanceParamCard({
               <span className="text-muted-foreground">
                 {m.governance_param_current_value()}{" "}
               </span>
-              <span className="font-medium">{formattedCurrent}</span>
+              <span className="font-medium">
+                <ParamValue
+                  value={currentValue}
+                  def={def}
+                  coopDecimals={coopDecimals}
+                  coopSymbol={coopSymbol}
+                />
+              </span>
             </span>
           </div>
         </CardHeader>
@@ -122,7 +122,12 @@ export function GovernanceParamCard({
                 {m.governance_param_your_vote()}
               </span>
               <span className="font-medium">
-                {formatParamValue(userChoice, def, coopDecimals, coopSymbol)}
+                <ParamValue
+                  value={userChoice}
+                  def={def}
+                  coopDecimals={coopDecimals}
+                  coopSymbol={coopSymbol}
+                />
               </span>
             </div>
           )}
@@ -134,7 +139,12 @@ export function GovernanceParamCard({
                   {m.governance_param_leader()}
                 </span>
                 <span className="font-medium">
-                  {formatParamValue(leaderValue, def, coopDecimals, coopSymbol)}
+                  <ParamValue
+                    value={leaderValue}
+                    def={def}
+                    coopDecimals={coopDecimals}
+                    coopSymbol={coopSymbol}
+                  />
                 </span>
               </div>
               <div className="mt-1 flex items-center justify-between">
@@ -189,12 +199,12 @@ export function GovernanceParamCard({
                       className={i > 0 ? "border-t border-border" : ""}
                     >
                       <td className="max-w-[40%] truncate px-3 py-2 font-mono text-xs">
-                        {formatParamValue(
-                          s.valueKey,
-                          def,
-                          coopDecimals,
-                          coopSymbol,
-                        )}
+                        <ParamValue
+                          value={s.valueKey}
+                          def={def}
+                          coopDecimals={coopDecimals}
+                          coopSymbol={coopSymbol}
+                        />
                       </td>
                       <td className="px-3 py-2 text-right text-xs text-muted-foreground">
                         {toLocalString(s.support)}
