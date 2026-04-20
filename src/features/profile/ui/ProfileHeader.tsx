@@ -15,6 +15,7 @@ import {
 import { useWallet } from "#/entities/user";
 import { useAttestations } from "#/entities/attestation";
 import type { CoopUser } from "#/entities/coop";
+import { getEligibility } from "#/entities/coop";
 
 import * as m from "#/paraglide/messages";
 
@@ -41,13 +42,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
 
   const isYou = connectedAddress === address;
 
-  const hasBalance = user.balance > 0 || user.bytes_balance > 0;
-  const minDate = new Date();
-  minDate.setDate(minDate.getDate() + 365);
-  const hasLockPeriod =
-    typeof user.unlock_date === "string" &&
-    user.unlock_date >= minDate.toISOString().slice(0, 10);
-  const isEligible = hasBalance && hasLockPeriod;
+  const { isEligible, hasBalance, hasLockPeriod } = getEligibility(user);
 
   const tgUsername = attestations?.telegram?.username;
   const tgUserId = attestations?.telegram?.userId;

@@ -20,7 +20,7 @@ import { env } from "#/shared/config/env";
 import { openCustomProtocol } from "#/shared/lib/openCustomProtocol";
 
 import { useWallet } from "#/entities/user";
-import { useCoopState } from "#/entities/coop";
+import { useCoopState, getEligibility } from "#/entities/coop";
 
 import { buildVoteLink } from "../lib/buildVoteLink";
 
@@ -45,12 +45,24 @@ function getCurrentStrength(
   return strength >= 1 && strength <= 3 ? strength : null;
 }
 
+function getIneligibleTooltip(
+  hasBalance: boolean,
+  hasLockPeriod: boolean,
+): string {
+  if (!hasBalance && !hasLockPeriod) return m.profile_ineligible_both();
+  if (!hasBalance) return m.profile_ineligible_no_balance();
+  return m.profile_ineligible_short_lock();
+}
+
 export const VoteButton: FC<VoteButtonProps> = ({ address }) => {
   const { address: connectedAddress } = useWallet();
-  const { vars } = useCoopState();
+  const { vars, getUser } = useCoopState();
 
   const isSelf = connectedAddress === address;
   const mainAa = env.VITE_AA_ADDRESS;
+
+  const recipientUser = getUser(address);
+  const { isEligible: recipientEligible, hasBalance: recipientHasBalance, hasLockPeriod: recipientHasLockPeriod } = getEligibility(recipientUser);
 
   const voteKey = connectedAddress
     ? `vote_${connectedAddress}_${address}`
@@ -116,6 +128,26 @@ export const VoteButton: FC<VoteButtonProps> = ({ address }) => {
             </span>
           </TooltipTrigger>
           <TooltipContent>{m.vote_self()}</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
+
+  if (!recipientEligible) {
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span>
+              <Button variant="outline" disabled>
+                {m.vote_button()}
+                <ChevronDown className="ml-1 size-4" />
+              </Button>
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>
+            {getIneligibleTooltip(recipientHasBalance, recipientHasLockPeriod)}
+          </TooltipContent>
         </Tooltip>
       </TooltipProvider>
     );

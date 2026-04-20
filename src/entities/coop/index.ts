@@ -8,5 +8,7 @@ export { useCoopState } from "./model/useCoopState";
 export { useAllUsers, extractTopUsers } from "./model/useAllUsers";
 export type { CoopConstants, CoopUser } from "./model/types";
 export type { LeaderboardUser } from "./model/useAllUsers";
+export { getEligibility } from "./lib/getEligibility";
+export type { Eligibility } from "./lib/getEligibility";
 export { useVotesReceived } from "./model/useVotesReceived";
 export type { VoteRecord } from "./model/useVotesReceived";
