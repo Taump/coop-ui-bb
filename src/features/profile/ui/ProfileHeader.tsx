@@ -243,6 +243,28 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
             <span>{m.profile_badge_real_name()}</span>
           </div>
         )}
+
+        {isYou && !tgUsername && (
+          <a
+            href={attestationLinks.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass}
+          >
+            {m.profile_setup_telegram()}
+          </a>
+        )}
+
+        {isYou && !discordUsername && (
+          <a
+            href={attestationLinks.discord}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass}
+          >
+            {m.profile_setup_discord()}
+          </a>
+        )}
       </div>
 
       <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
@@ -270,83 +292,48 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
         </a>
       </div>
 
-      {(() => {
-        if (isYou) {
-          const items: ReactNode[] = [];
-          if (!tgUsername) {
-            items.push(
-              <a
-                key="tg-setup"
-                href={attestationLinks.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkClass}
-              >
-                {m.profile_setup_telegram()}
-              </a>,
-            );
-          }
-          if (!discordUsername) {
-            items.push(
-              <a
-                key="dc-setup"
-                href={attestationLinks.discord}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={linkClass}
-              >
-                {m.profile_setup_discord()}
-              </a>,
-            );
-          }
-          if (items.length === 0) return null;
-          return (
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
-              {items}
-            </div>
+      {!isYou &&
+        (() => {
+          const telegramLink = (
+            <a
+              href={obyteCommunityUrls.telegram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkClass}
+            >
+              {m.profile_badge_telegram()}
+            </a>
           );
-        }
+          const discordLink = (
+            <a
+              href={obyteCommunityUrls.discord}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={linkClass}
+            >
+              {m.profile_badge_discord()}
+            </a>
+          );
 
-        const telegramLink = (
-          <a
-            href={obyteCommunityUrls.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={linkClass}
-          >
-            {m.profile_badge_telegram()}
-          </a>
-        );
-        const discordLink = (
-          <a
-            href={obyteCommunityUrls.discord}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={linkClass}
-          >
-            {m.profile_badge_discord()}
-          </a>
-        );
+          const sentence = interpolate(
+            m.profile_discuss_both({
+              name: "[NAME]",
+              telegram: "[TG]",
+              discord: "[DC]",
+            }),
+            {
+              "[NAME]": (
+                <span className="font-medium">
+                  {displayName.charAt(0).toUpperCase() + displayName.slice(1)}
+                </span>
+              ),
+              "[TG]": telegramLink,
+              "[DC]": discordLink,
+            },
+          );
 
-        const sentence = interpolate(
-          m.profile_discuss_both({
-            name: "[NAME]",
-            telegram: "[TG]",
-            discord: "[DC]",
-          }),
-          {
-            "[NAME]": (
-              <span className="font-medium">
-                {displayName.charAt(0).toUpperCase() + displayName.slice(1)}
-              </span>
-            ),
-            "[TG]": telegramLink,
-            "[DC]": discordLink,
-          },
-        );
-
-        return <p className="text-sm text-muted-foreground">{sentence}</p>;
-      })()}
+          return <p className="text-sm text-muted-foreground">{sentence}</p>;
+        })()}
     </div>
   );
 };
