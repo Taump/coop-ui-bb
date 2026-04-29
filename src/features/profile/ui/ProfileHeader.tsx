@@ -1,15 +1,15 @@
 import type { FC, ReactNode } from "react";
 import { Fragment, useState, useCallback } from "react";
-import { Building2, ShieldCheck, Users, VerifiedIcon } from "lucide-react";
+import { ShieldCheck, VerifiedIcon } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "#/shared/ui/avatar";
 import { getExplorerUrl } from "#/shared/lib/getExplorerUrl";
 import { getContactUrl } from "#/shared/lib/getContactUrl";
 import {
-  obyteServiceUrls,
   obyteCommunityUrls,
   attestationLinks,
 } from "#/shared/config/appConfig";
+import { ObyteServiceLinks } from "./ObyteServiceLinks";
 import {
   Tooltip,
   TooltipContent,
@@ -267,30 +267,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
         )}
       </div>
 
-      <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
-        <a
-          href={obyteServiceUrls.city(address)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-x-2 underline-offset-4 hover:underline"
-        >
-          <Building2
-            className="size-4 text-muted-foreground"
-            strokeWidth={1.5}
-          />
-          <span>{m.profile_badge_city()}</span>
-        </a>
-
-        <a
-          href={obyteServiceUrls.friends(address)}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-x-2 underline-offset-4 hover:underline"
-        >
-          <Users className="size-4 text-muted-foreground" strokeWidth={1.5} />
-          <span>{m.profile_badge_friends()}</span>
-        </a>
-      </div>
+      <ObyteServiceLinks address={address} displayName={displayName} />
 
       {!isYou &&
         (() => {

@@ -44,6 +44,8 @@
   "profile_badge_real_name": "Real Name",
   "profile_badge_city": "City",
   "profile_badge_friends": "Friends",
+  "profile_city_tooltip": "{name}'s profile in Obyte City",
+  "profile_friends_tooltip": "{name}'s profile in Obyte Friends",
   "profile_discuss_both": "Discuss {name}'s contribution on {telegram} or {discord}.",
   "profile_discuss_telegram": "Discuss {name}'s contribution on {telegram}.",
   "profile_discuss_discord": "Discuss {name}'s contribution on {discord}.",

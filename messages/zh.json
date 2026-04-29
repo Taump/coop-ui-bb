@@ -44,6 +44,8 @@
   "profile_badge_real_name": "实名",
   "profile_badge_city": "City",
   "profile_badge_friends": "Friends",
+  "profile_city_tooltip": "{name} 在 Obyte City 的个人资料",
+  "profile_friends_tooltip": "{name} 在 Obyte Friends 的个人资料",
   "profile_discuss_both": "在 {telegram} 或 {discord} 上讨论 {name} 的贡献。",
   "profile_discuss_telegram": "在 {telegram} 上讨论 {name} 的贡献。",
   "profile_discuss_discord": "在 {discord} 上讨论 {name} 的贡献。",
