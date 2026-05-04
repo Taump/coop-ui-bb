@@ -4,6 +4,8 @@ interface CoopAaState {
   total_locked: number;
   total_locked_bytes: number;
   liquid_emissions: number;
+  liquid_emissions_per_vote: number;
+  liquid_emissions_per_vb: number;
   total_votes: number;
   total_votes_bal: number;
   ts: number;
@@ -28,7 +30,6 @@ export function computeLiveLiquidBalance(
   nowSec: number = Math.floor(Date.now() / 1000),
 ): number {
   const stored = user.liquid_balance ?? 0;
-  if (!state.total_votes || !state.total_votes_bal) return stored;
   if (!user.votes || user.votes <= 0) return stored;
 
   const elapsedDays = Math.max(0, (nowSec - state.ts) / 86400);
@@ -36,15 +37,20 @@ export function computeLiveLiquidBalance(
     state.total_locked +
     (state.total_locked_bytes / ceilingPrice) * params.bytes_reducer;
 
-  const liveLiquidEmissions =
-    state.liquid_emissions + s * params.daily_liquid_reward * elapsedDays;
+  const newLiquidEmissions = s * params.daily_liquid_reward * elapsedDays;
 
-  const newLiquidEmissions = liveLiquidEmissions - user.last_liquid_emissions;
+  let liveLiqPerVote = state.liquid_emissions_per_vote;
+  let liveLiqPerVb = state.liquid_emissions_per_vb;
+  if (state.total_votes > 0 && state.total_votes_bal > 0) {
+    liveLiqPerVote += newLiquidEmissions / state.total_votes;
+    liveLiqPerVb += newLiquidEmissions / state.total_votes_bal;
+  }
 
-  const userShare =
-    params.by_votes_share * (user.votes / state.total_votes) +
-    (1 - params.by_votes_share) *
-      ((user.votes * user.total_balance) / state.total_votes_bal);
+  const dPerVote = liveLiqPerVote - user.last_liquid_emissions_per_vote;
+  const dPerVb = liveLiqPerVb - user.last_liquid_emissions_per_vb;
 
-  return stored + newLiquidEmissions * userShare;
+  const v = params.by_votes_share * user.votes;
+  const vb = (1 - params.by_votes_share) * user.votes * user.total_balance;
+
+  return stored + v * dPerVote + vb * dPerVb;
 }

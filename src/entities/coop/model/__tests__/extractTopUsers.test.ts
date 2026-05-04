@@ -10,8 +10,10 @@ function makeUser(overrides: Record<string, unknown> = {}) {
     reg_date: "2026-01-01",
     reg_ts: 1700000000,
     last_ts: 1700000000,
-    last_locked_emissions: 0,
-    last_liquid_emissions: 0,
+    last_locked_emissions_per_vote: 0,
+    last_liquid_emissions_per_vote: 0,
+    last_locked_emissions_per_vb: 0,
+    last_liquid_emissions_per_vb: 0,
     ...overrides,
   };
 }

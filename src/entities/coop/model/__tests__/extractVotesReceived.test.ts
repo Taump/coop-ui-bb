@@ -78,4 +78,33 @@ describe("extractVotesReceived", () => {
     };
     expect(extractVotesReceived(vars, "TARGET")).toEqual([]);
   });
+
+  it("reads strength when present", () => {
+    const vars = {
+      vote_A_T: { votes: 5, strength: 2, ts: 1 },
+      vote_B_T: { votes: 7, strength: 3, ts: 2 },
+    };
+    const result = extractVotesReceived(vars, "T");
+    expect(result).toHaveLength(2);
+    const a = result.find((r) => r.fromAddress === "A");
+    const b = result.find((r) => r.fromAddress === "B");
+    expect(a?.strength).toBe(2);
+    expect(b?.strength).toBe(3);
+  });
+
+  it("leaves strength undefined when absent (legacy votes)", () => {
+    const vars = {
+      vote_A_T: { votes: 5, ts: 1 },
+    };
+    const result = extractVotesReceived(vars, "T");
+    expect(result[0].strength).toBeUndefined();
+  });
+
+  it("ignores non-numeric strength values", () => {
+    const vars = {
+      vote_A_T: { votes: 5, strength: "high", ts: 1 },
+    };
+    const result = extractVotesReceived(vars, "T");
+    expect(result[0].strength).toBeUndefined();
+  });
 });

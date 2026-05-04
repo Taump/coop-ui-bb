@@ -12,12 +12,16 @@ export interface CoopUser {
   reg_date: string;
   reg_ts: number;
   last_ts: number;
-  last_locked_emissions: number;
-  last_liquid_emissions: number;
+  last_locked_emissions_per_vote: number;
+  last_liquid_emissions_per_vote: number;
+  last_locked_emissions_per_vb: number;
+  last_liquid_emissions_per_vb: number;
   liquid_balance?: number;
   votes?: number;
   ref?: string;
   no_referrer_deposit_reward?: boolean;
   referral_rewards?: number;
   referred_users?: number;
+  locked_rewards?: number;
+  liquid_rewards?: number;
 }

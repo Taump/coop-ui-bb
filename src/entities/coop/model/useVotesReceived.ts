@@ -6,6 +6,7 @@ import { coopStore } from "./store";
 export interface VoteRecord {
   fromAddress: string;
   votes: number;
+  strength?: number;
   ts: number;
 }
 
@@ -21,7 +22,9 @@ export function extractVotesReceived(
 
   for (const key in vars) {
     if (!key.startsWith(VOTE_PREFIX) || !key.endsWith(suffix)) continue;
-    const val = vars[key] as { votes: number; ts: number } | null;
+    const val = vars[key] as
+      | { votes: number; strength?: number; ts: number }
+      | null;
     if (!val || typeof val.votes !== "number") continue;
 
     const fromAddress = key.slice(
@@ -31,6 +34,7 @@ export function extractVotesReceived(
     records.push({
       fromAddress,
       votes: val.votes,
+      strength: typeof val.strength === "number" ? val.strength : undefined,
       ts: val.ts,
     });
   }

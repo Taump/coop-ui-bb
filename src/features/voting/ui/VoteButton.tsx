@@ -83,7 +83,9 @@ export const VoteButton: FC<VoteButtonProps> = ({ address }) => {
     ? `vote_${connectedAddress}_${address}`
     : null;
   const currentVote = voteKey
-    ? (vars[voteKey] as { votes: number; ts: number } | undefined)
+    ? (vars[voteKey] as
+        | { votes: number; strength?: number; ts: number }
+        | undefined)
     : undefined;
 
   const voterData = connectedAddress
@@ -92,10 +94,10 @@ export const VoteButton: FC<VoteButtonProps> = ({ address }) => {
         | undefined)
     : undefined;
 
-  const currentStrength = getCurrentStrength(
-    currentVote?.votes,
-    voterData?.total_balance,
-  );
+  const currentStrength =
+    typeof currentVote?.strength === "number"
+      ? currentVote.strength
+      : getCurrentStrength(currentVote?.votes, voterData?.total_balance);
   const hasVoted = !!currentVote && currentVote.votes > 0;
 
   const handleVote = useCallback(

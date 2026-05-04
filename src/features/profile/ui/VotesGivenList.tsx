@@ -39,9 +39,18 @@ export const VotesGivenList: FC<VotesGivenListProps> = ({ address }) => {
                       {formatDateShort(new Date(record.ts * 1000))}
                     </span>
                   </div>
-                  <span className="text-muted-foreground">
-                    {toLocalString(record.votes)}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    {typeof record.strength === "number" && (
+                      <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
+                        {m.vote_list_strength({
+                          n: String(record.strength),
+                        })}
+                      </span>
+                    )}
+                    <span className="text-muted-foreground">
+                      {toLocalString(record.votes)}
+                    </span>
+                  </div>
                 </div>
               </Fragment>
             ))}

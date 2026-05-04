@@ -18,6 +18,7 @@ import {
 } from "#/features/profile";
 import { VoteButton } from "#/features/voting";
 import { DepositBanner, DepositForm } from "#/features/deposit";
+import { ReplaceForm } from "#/features/replace";
 
 export const Route = createFileRoute("/user/$address")({
   component: UserProfile,
@@ -55,8 +56,10 @@ function UserProfile() {
     reg_date: "",
     reg_ts: 0,
     last_ts: 0,
-    last_locked_emissions: 0,
-    last_liquid_emissions: 0,
+    last_locked_emissions_per_vote: 0,
+    last_liquid_emissions_per_vote: 0,
+    last_locked_emissions_per_vb: 0,
+    last_liquid_emissions_per_vb: 0,
   };
 
   const user = getUser(address) ?? defaultUser;
@@ -91,7 +94,7 @@ function UserProfile() {
         </div>
 
         {isYou && (
-          <div className="col-span-6">
+          <div className="col-span-6 md:col-span-3">
             <Card>
               <CardContent>
                 <CardTitle>{m.deposit_title()}</CardTitle>
@@ -100,6 +103,12 @@ function UserProfile() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        )}
+
+        {isYou && user.bytes_balance > 0 && (
+          <div className="col-span-6 md:col-span-3">
+            <ReplaceForm user={user} />
           </div>
         )}
 
