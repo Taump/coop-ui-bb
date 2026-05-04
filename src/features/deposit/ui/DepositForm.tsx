@@ -15,10 +15,10 @@ import { Slider } from "#/shared/ui/slider";
 import { diffDays } from "#/shared/lib/diffDays";
 import { formatDateShort } from "#/shared/lib/formatDateShort";
 import { tooManyDecimals } from "#/shared/lib/tooManyDecimals";
-import { getReferrerFromUrl } from "#/shared/lib/getReferrerFromUrl";
 import { useCoopState } from "#/entities/coop";
 import { useAssetInfo } from "#/entities/token";
 import { useWallet } from "#/entities/user";
+import { useEffectiveReferrer } from "#/features/referrals";
 
 import { buildDepositLink } from "../lib/buildDepositLink";
 import {
@@ -61,11 +61,7 @@ export function DepositForm() {
   const { coopAsset, coopDecimals, gbyteDecimals, coopSymbol } = useAssetInfo(
     constants?.asset,
   );
-  const referrer = useMemo(() => {
-    const ref = getReferrerFromUrl();
-    if (!ref) return undefined;
-    return getUser(ref) ? ref : undefined;
-  }, [getUser]);
+  const referrer = useEffectiveReferrer();
 
   const user = address ? getUser(address) : undefined;
   const effectiveMinDate = useMemo(() => {
@@ -178,7 +174,9 @@ export function DepositForm() {
               field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <Field data-invalid={isInvalid || undefined}>
-                <FieldLabel htmlFor={field.name}>{m.deposit_amount_label()}</FieldLabel>
+                <FieldLabel htmlFor={field.name}>
+                  {m.deposit_amount_label()}
+                </FieldLabel>
                 <div className="flex gap-2">
                   <Input
                     id={field.name}

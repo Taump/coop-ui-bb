@@ -27,6 +27,7 @@ import { VoteButton } from "#/features/voting";
 import { DepositBanner, DepositDialog } from "#/features/deposit";
 import { ReplaceForm } from "#/features/replace";
 import { ClaimRewardsDialog } from "#/features/claim-rewards";
+import { ReferralLinkCard } from "#/features/referrals";
 
 export const Route = createFileRoute("/user/$address")({
   component: UserProfile,
@@ -108,9 +109,7 @@ function UserProfile() {
               </button>
             </TooltipTrigger>
           </ClaimRewardsDialog>
-          <TooltipContent>
-            {m.profile_claim_rewards_tooltip()}
-          </TooltipContent>
+          <TooltipContent>{m.profile_claim_rewards_tooltip()}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
     ) : null;
@@ -145,6 +144,12 @@ function UserProfile() {
         <div className="col-span-6 md:col-span-3 lg:col-span-2">
           <VotesCard totalVotes={user.votes ?? 0} />
         </div>
+
+        {isYou && Boolean(user.reg_ts) && (
+          <div className="col-span-6">
+            <ReferralLinkCard address={address} />
+          </div>
+        )}
 
         {isYou && user.bytes_balance > 0 && (
           <div className="col-span-6 md:col-span-3">

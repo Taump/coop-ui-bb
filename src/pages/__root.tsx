@@ -8,6 +8,7 @@ import { AppLayout } from "#/widgets/layout";
 import TanStackQueryDevtools from "#/app/providers/query-devtools";
 
 import { getLocale } from "#/paraglide/runtime";
+import { useTrackReferrer } from "#/features/referrals";
 
 import type { QueryClient } from "@tanstack/react-query";
 
@@ -25,6 +26,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootLayout() {
+  useTrackReferrer();
+
   return (
     <TanStackQueryProvider>
       <AppLayout>

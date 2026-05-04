@@ -7,7 +7,9 @@ interface ProfileSkeletonProps {
   isYou?: boolean;
 }
 
-export const ProfileSkeleton: FC<ProfileSkeletonProps> = ({ isYou = false }) => (
+export const ProfileSkeleton: FC<ProfileSkeletonProps> = ({
+  isYou = false,
+}) => (
   <div className="space-y-10">
     <div className="flex flex-col gap-3">
       <div className="mb-3 flex items-center gap-4">
@@ -44,6 +46,16 @@ export const ProfileSkeleton: FC<ProfileSkeletonProps> = ({ isYou = false }) => 
           <Skeleton className="mt-2 h-7 w-32" />
         </CardContent>
       </Card>
+
+      {isYou && (
+        <Card className="col-span-6">
+          <CardContent>
+            <Skeleton className="h-5 w-32" />
+            <Skeleton className="mt-3 h-9 w-full" />
+            <Skeleton className="mt-3 h-3 w-1/2" />
+          </CardContent>
+        </Card>
+      )}
 
       {isYou && (
         <Card className="col-span-6">
