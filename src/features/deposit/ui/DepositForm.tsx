@@ -115,7 +115,7 @@ export function DepositForm() {
 
   useEffect(() => {
     if (!isLoaded) return;
-    if (!form.getFieldValue("amount")) {
+    if (coopDecimals && !form.getFieldValue("amount")) {
       form.setFieldValue(
         "amount",
         String(
@@ -124,7 +124,7 @@ export function DepositForm() {
       );
     }
     form.setFieldValue("unlockDate", effectiveMinDate);
-  }, [isLoaded, effectiveMinDate]);
+  }, [isLoaded, coopDecimals, effectiveMinDate]);
 
   return (
     <div className="flex flex-col gap-5">
