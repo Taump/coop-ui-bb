@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { Link } from "@tanstack/react-router";
 
-import { useAttestations } from "#/entities/attestation";
+import { useAttestations } from "../model/useAttestations";
 
 interface UserDisplayNameProps {
   address: string;

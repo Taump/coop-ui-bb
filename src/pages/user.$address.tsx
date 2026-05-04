@@ -142,7 +142,7 @@ function UserProfile() {
           />
         </div>
         <div className="col-span-6 md:col-span-3 lg:col-span-2">
-          <VotesCard totalVotes={user.votes ?? 0} />
+          <VotesCard totalVotes={user.votes ?? 0} coopDecimals={coopDecimals} />
         </div>
 
         {isYou && Boolean(user.reg_ts) && (
@@ -158,10 +158,10 @@ function UserProfile() {
         )}
 
         <div className="col-span-6 lg:col-span-3">
-          <VotesList address={address} />
+          <VotesList address={address} coopDecimals={coopDecimals} />
         </div>
         <div className="col-span-6 lg:col-span-3">
-          <VotesGivenList address={address} />
+          <VotesGivenList address={address} coopDecimals={coopDecimals} />
         </div>
       </div>
     </div>

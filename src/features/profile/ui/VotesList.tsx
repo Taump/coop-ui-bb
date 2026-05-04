@@ -4,22 +4,23 @@ import { Card, CardContent, CardHeader, CardTitle } from "#/shared/ui/card";
 import { Separator } from "#/shared/ui/separator";
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { formatDateShort } from "#/shared/lib/formatDateShort";
+import { getVotesDivisor } from "#/shared/lib/votesScale";
 
 import { useVotesReceived } from "#/entities/coop";
-import { useDisplayName } from "#/entities/attestation";
-
-import { UserDisplayName } from "./UserDisplayName";
+import { useDisplayName, UserDisplayName } from "#/entities/attestation";
 
 import * as m from "#/paraglide/messages";
 
 interface VotesListProps {
   address: string;
+  coopDecimals: number;
 }
 
-export const VotesList: FC<VotesListProps> = ({ address }) => {
+export const VotesList: FC<VotesListProps> = ({ address, coopDecimals }) => {
   const voteRecords = useVotesReceived(address);
   const rawName = useDisplayName(address);
   const name = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+  const votesDivisor = getVotesDivisor(coopDecimals);
 
   return (
     <Card>
@@ -48,7 +49,7 @@ export const VotesList: FC<VotesListProps> = ({ address }) => {
                       </span>
                     )}
                     <span className="text-muted-foreground">
-                      {toLocalString(record.votes)}
+                      {toLocalString(record.votes / votesDivisor)}
                     </span>
                   </div>
                 </div>

@@ -21,12 +21,14 @@ import {
 import { QRButton } from "#/shared/ui/qr-button";
 
 import { toLocalString } from "#/shared/lib/toLocalString";
+import { getVotesDivisor } from "#/shared/lib/votesScale";
 import type { ParsedGovernanceParam } from "#/entities/governance";
 
 import { buildCommitLink } from "../lib/buildGovernanceLink";
 import { Countdown } from "./Countdown";
 import { GovernanceVoteDialog } from "./GovernanceVoteDialog";
 import { ParamValue } from "./ParamValue";
+import { SupportVotersDialog } from "./SupportVotersDialog";
 
 interface GovernanceParamCardProps {
   param: ParsedGovernanceParam;
@@ -52,14 +54,26 @@ export function GovernanceParamCard({
     userChoice,
   } = param;
 
+  const votesDivisor = getVotesDivisor(coopDecimals);
+
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogInitialValue, setDialogInitialValue] = useState<
     string | number | undefined
   >(undefined);
 
+  const [supportDialogOpen, setSupportDialogOpen] = useState(false);
+  const [supportDialogValueKey, setSupportDialogValueKey] = useState<
+    string | null
+  >(null);
+
   const openDialog = (initialValue?: string | number) => {
     setDialogInitialValue(initialValue);
     setDialogOpen(true);
+  };
+
+  const openSupportDialog = (valueKey: string) => {
+    setSupportDialogValueKey(valueKey);
+    setSupportDialogOpen(true);
   };
 
   const hasLeader =
@@ -206,8 +220,13 @@ export function GovernanceParamCard({
                           coopSymbol={coopSymbol}
                         />
                       </td>
-                      <td className="px-3 py-2 text-right text-xs text-muted-foreground">
-                        {toLocalString(s.support)}
+                      <td className="px-3 py-2 text-right text-xs">
+                        <button
+                          onClick={() => openSupportDialog(s.valueKey)}
+                          className="cursor-pointer text-muted-foreground underline underline-offset-4 hover:text-foreground"
+                        >
+                          {toLocalString(s.support / votesDivisor)}
+                        </button>
                       </td>
                       <td className="px-3 py-2 text-right">
                         <button
@@ -244,6 +263,15 @@ export function GovernanceParamCard({
         param={param}
         governanceAa={governanceAa}
         address={address}
+        coopDecimals={coopDecimals}
+        coopSymbol={coopSymbol}
+      />
+
+      <SupportVotersDialog
+        open={supportDialogOpen}
+        onOpenChange={setSupportDialogOpen}
+        param={param}
+        valueKey={supportDialogValueKey}
         coopDecimals={coopDecimals}
         coopSymbol={coopSymbol}
       />

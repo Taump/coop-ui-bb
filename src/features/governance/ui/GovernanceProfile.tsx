@@ -23,7 +23,8 @@ interface GovernanceProfileProps {
 export function GovernanceProfile({ connectWallet }: GovernanceProfileProps) {
   const { address, isConnected } = useWallet();
   const { constants, getUser } = useCoopState();
-  const { coopSymbol } = useAssetInfo(constants?.asset);
+  const { coopDecimals, coopSymbol } = useAssetInfo(constants?.asset);
+  const coopDivisor = 10 ** coopDecimals;
 
   if (!isConnected || !address) {
     return (
@@ -37,7 +38,7 @@ export function GovernanceProfile({ connectWallet }: GovernanceProfileProps) {
 
   const user = getUser(address);
   const totalBalance = user?.total_balance ?? 0;
-  const votingPower = Math.sqrt(totalBalance);
+  const votingPower = Math.sqrt(totalBalance / coopDivisor);
 
   return (
     <Card>
@@ -73,7 +74,7 @@ export function GovernanceProfile({ connectWallet }: GovernanceProfileProps) {
               </Tooltip>
             </TooltipProvider>
             <span className="font-medium">
-              {toLocalString(totalBalance / 1e9)} {coopSymbol}
+              {toLocalString(totalBalance / coopDivisor)} {coopSymbol}
             </span>
           </div>
           <div className="flex items-center gap-1">

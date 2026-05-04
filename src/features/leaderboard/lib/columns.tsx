@@ -4,6 +4,7 @@ import { ArrowDown, Info } from "lucide-react";
 import * as m from "#/paraglide/messages";
 
 import { toLocalString } from "#/shared/lib/toLocalString";
+import { getVotesDivisor } from "#/shared/lib/votesScale";
 import { useAttestations } from "#/entities/attestation";
 import {
   Tooltip,
@@ -62,6 +63,7 @@ export function getColumns({
 }: GetColumnsOptions): ColumnDef<LeaderboardUser>[] {
   const coopDivisor = 10 ** coopDecimals;
   const gbyteDivisor = 10 ** gbyteDecimals;
+  const votesDivisor = getVotesDivisor(coopDecimals);
 
   return [
     {
@@ -71,9 +73,7 @@ export function getColumns({
         const sortedIndex = table
           .getRowModel()
           .rows.findIndex((r) => r.id === row.id);
-        return (
-          <span className="text-muted-foreground">{sortedIndex + 1}</span>
-        );
+        return <span className="text-muted-foreground">{sortedIndex + 1}</span>;
       },
       enableSorting: false,
     },
@@ -147,7 +147,9 @@ export function getColumns({
           <SortIcon isSorted={column.getIsSorted()} />
         </button>
       ),
-      cell: ({ row }) => <span>{toLocalString(row.original.votes)}</span>,
+      cell: ({ row }) => (
+        <span>{toLocalString(row.original.votes / votesDivisor)}</span>
+      ),
     },
   ];
 }
