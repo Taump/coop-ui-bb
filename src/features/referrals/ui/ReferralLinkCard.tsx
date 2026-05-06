@@ -4,6 +4,7 @@ import { Check, Copy } from "lucide-react";
 import * as m from "#/paraglide/messages";
 
 import { useCoopState } from "#/entities/coop";
+import { useAssetInfo } from "#/entities/token";
 import { Button } from "#/shared/ui/button";
 import { Card, CardContent, CardTitle } from "#/shared/ui/card";
 import { Input } from "#/shared/ui/input";
@@ -14,7 +15,8 @@ interface ReferralLinkCardProps {
 }
 
 export const ReferralLinkCard: FC<ReferralLinkCardProps> = ({ address }) => {
-  const { getParam } = useCoopState();
+  const { getParam, constants } = useCoopState();
+  const { coopDecimals } = useAssetInfo(constants?.asset);
   const [copied, setCopied] = useState(false);
   const link = `${window.location.origin}/user/${address}`;
   const coopPct = toLocalString(
@@ -22,6 +24,9 @@ export const ReferralLinkCard: FC<ReferralLinkCardProps> = ({ address }) => {
   );
   const bytesPct = toLocalString(
     getParam("referrer_bytes_deposit_reward_share") * 100,
+  );
+  const fixedReward = toLocalString(
+    getParam("referral_reward") / 10 ** (coopDecimals || 9),
   );
 
   const handleCopy = async () => {
@@ -69,7 +74,7 @@ export const ReferralLinkCard: FC<ReferralLinkCardProps> = ({ address }) => {
         </div>
 
         <p className="mt-3 text-xs text-muted-foreground">
-          {m.referral_link_caption({ coopPct, bytesPct })}
+          {m.referral_link_caption({ fixedReward, coopPct, bytesPct })}
         </p>
       </CardContent>
     </Card>

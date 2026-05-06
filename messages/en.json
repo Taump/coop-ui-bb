@@ -37,7 +37,7 @@
   "profile_referred_users_detail": "referred users: {count}",
   "profile_referrer": "Referrer",
   "referral_link_title": "Your referral link",
-  "referral_link_caption": "Share this link — invitees get a fixed bonus on their first deposit, you earn {coopPct}% from their COOP deposits and {bytesPct}% from their GBYTE deposits in liquid COOP.",
+  "referral_link_caption": "Share this link — when an invitee signs up via your link and makes their first deposit, both of you get a {fixedReward} COOP bonus added to your locked balance. You also earn {coopPct}% from their COOP deposits and {bytesPct}% from their GBYTE deposits as liquid COOP.",
   "referral_link_copy": "Copy",
   "referral_link_copied": "Copied",
   "profile_claim_rewards_tooltip": "Claim rewards",

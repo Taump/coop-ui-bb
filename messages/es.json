@@ -37,7 +37,7 @@
   "profile_referred_users_detail": "usuarios referidos: {count}",
   "profile_referrer": "Referente",
   "referral_link_title": "Tu enlace de referido",
-  "referral_link_caption": "Comparte este enlace — los invitados reciben un bono fijo en su primer depósito, tú recibes {coopPct}% de sus depósitos en COOP y {bytesPct}% de sus depósitos en GBYTE en COOP líquido.",
+  "referral_link_caption": "Comparte este enlace — cuando un invitado se registra con tu enlace y realiza su primer depósito, ambos reciben un bono de {fixedReward} COOP en el saldo bloqueado. Además ganas {coopPct}% de sus depósitos en COOP y {bytesPct}% de sus depósitos en GBYTE como COOP líquido.",
   "referral_link_copy": "Copiar",
   "referral_link_copied": "Copiado",
   "profile_claim_rewards_tooltip": "Reclamar recompensas",

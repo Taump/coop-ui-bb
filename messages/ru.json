@@ -37,7 +37,7 @@
   "profile_referred_users_detail": "приведено пользователей: {count}",
   "profile_referrer": "Реферер",
   "referral_link_title": "Ваша реферальная ссылка",
-  "referral_link_caption": "Поделитесь ссылкой — приглашённый получает фиксированный бонус при первом депозите, вы — {coopPct}% с его депозитов в COOP и {bytesPct}% с депозитов в GBYTE (в liquid COOP).",
+  "referral_link_caption": "Поделитесь ссылкой — когда приглашённый регистрируется по вашей ссылке и делает первый депозит, оба получаете бонус {fixedReward} COOP к заблокированному балансу. Вы также получаете {coopPct}% с его депозитов в COOP и {bytesPct}% с депозитов в GBYTE в виде liquid COOP.",
   "referral_link_copy": "Скопировать",
   "referral_link_copied": "Скопировано",
   "profile_claim_rewards_tooltip": "Забрать награды",
