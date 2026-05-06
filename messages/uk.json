@@ -96,7 +96,6 @@
   "replace_preview_will_receive": "Ви отримаєте назад",
   "replace_submit": "Замінити",
   "replace_error_no_bytes": "Недостатньо заблокованих GBYTE для цієї суми",
-  "replace_error_amount_too_high": "Сума перевищує ваш заблокований баланс COOP",
   "deposit_amount_label": "Сума",
   "deposit_lock_period_label": "Термін блокування",
   "deposit_lock_days": "{days} днів",

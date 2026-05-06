@@ -33,19 +33,11 @@ export function ReplaceForm({ user }: ReplaceFormProps) {
 
   const ceilingPrice = getCeilingPrice();
 
-  const lockedCoop = user.balance / 10 ** coopDecimals;
-
-  const maxCoopByBytes = useMemo(() => {
+  const maxCoop = useMemo(() => {
     if (!ceilingPrice || ceilingPrice <= 0) return 0;
-    // user.bytes_balance is atomic; max coop atomic = floor(bytes / price)
     const maxAtomic = Math.floor(user.bytes_balance / ceilingPrice);
     return maxAtomic / 10 ** coopDecimals;
   }, [user.bytes_balance, ceilingPrice, coopDecimals]);
-
-  const maxCoop = useMemo(
-    () => Math.min(lockedCoop, maxCoopByBytes),
-    [lockedCoop, maxCoopByBytes],
-  );
 
   const num = Number(amount);
   const validNum = !isNaN(num) && num > 0 ? num : 0;
@@ -62,8 +54,7 @@ export function ReplaceForm({ user }: ReplaceFormProps) {
     if (hasDecimalsIssue)
       return m.deposit_error_decimals({ decimals: String(coopDecimals) });
     if (validNum <= 0) return m.deposit_error_positive();
-    if (validNum > lockedCoop) return m.replace_error_amount_too_high();
-    if (validNum > maxCoopByBytes) return m.replace_error_no_bytes();
+    if (validNum > maxCoop) return m.replace_error_no_bytes();
     return null;
   })();
 

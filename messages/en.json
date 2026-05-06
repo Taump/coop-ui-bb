@@ -96,7 +96,6 @@
   "replace_preview_will_receive": "You will get back",
   "replace_submit": "Replace",
   "replace_error_no_bytes": "Not enough locked GBYTE to cover this amount",
-  "replace_error_amount_too_high": "Amount exceeds your locked COOP balance",
   "deposit_amount_label": "Amount",
   "deposit_lock_period_label": "Lock period",
   "deposit_lock_days": "{days} days",

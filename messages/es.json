@@ -96,7 +96,6 @@
   "replace_preview_will_receive": "Recibirás de vuelta",
   "replace_submit": "Reemplazar",
   "replace_error_no_bytes": "GBYTE bloqueados insuficientes para esta cantidad",
-  "replace_error_amount_too_high": "La cantidad supera tu saldo bloqueado de COOP",
   "deposit_amount_label": "Cantidad",
   "deposit_lock_period_label": "Periodo de bloqueo",
   "deposit_lock_days": "{days} días",
