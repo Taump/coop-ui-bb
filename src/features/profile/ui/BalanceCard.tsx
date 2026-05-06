@@ -39,6 +39,34 @@ interface BalanceCardProps {
   action?: ReactNode;
 }
 
+interface AmountProps {
+  value: number;
+  decimals: number;
+  symbol: string;
+}
+
+const Amount: FC<AmountProps> = ({ value, decimals, symbol }) => {
+  const rounded = formatRounded(value, decimals);
+  const exact = toLocalString(value);
+
+  if (rounded === exact) {
+    return <span>{rounded}</span>;
+  }
+
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span>{rounded}</span>
+        </TooltipTrigger>
+        <TooltipContent>
+          {exact} {symbol}
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+};
+
 export const BalanceCard: FC<BalanceCardProps> = ({
   user,
   coopDecimals,
@@ -68,16 +96,11 @@ export const BalanceCard: FC<BalanceCardProps> = ({
         >
           <CollapsibleTrigger asChild className="mt-2 text-lg lg:text-xl">
             <div className={cn(hasDetails ? "cursor-pointer select-none" : "")}>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <span>{formatRounded(totalBalanceRaw, coopDecimals)}</span>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    {toLocalString(totalBalanceRaw)} {coopSymbol}
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>{" "}
+              <Amount
+                value={totalBalanceRaw}
+                decimals={coopDecimals}
+                symbol={coopSymbol}
+              />{" "}
               <small>{coopSymbol}</small>
               {hasDetails && (
                 <ChevronDown
@@ -94,61 +117,47 @@ export const BalanceCard: FC<BalanceCardProps> = ({
           <CollapsibleContent className="mt-2 grid gap-3 text-sm">
             <Separator />
 
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      {m.profile_coop_balance()}
-                    </span>
-                    <span>
-                      {formatRounded(coopBalanceRaw, coopDecimals)} {coopSymbol}
-                    </span>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  {toLocalString(coopBalanceRaw)} {coopSymbol}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">
+                {m.profile_coop_balance()}
+              </span>
+              <span>
+                <Amount
+                  value={coopBalanceRaw}
+                  decimals={coopDecimals}
+                  symbol={coopSymbol}
+                />{" "}
+                {coopSymbol}
+              </span>
+            </div>
 
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      {m.profile_gbyte_balance()}
-                    </span>
-                    <span>
-                      {formatRounded(gbyteBalanceRaw, gbyteDecimals)}{" "}
-                      {gbyteSymbol}
-                    </span>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  {toLocalString(gbyteBalanceRaw)} {gbyteSymbol}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">
+                {m.profile_gbyte_balance()}
+              </span>
+              <span>
+                <Amount
+                  value={gbyteBalanceRaw}
+                  decimals={gbyteDecimals}
+                  symbol={gbyteSymbol}
+                />{" "}
+                {gbyteSymbol}
+              </span>
+            </div>
 
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">
-                      {m.profile_liquid_balance()}
-                    </span>
-                    <span>
-                      {formatRounded(liquidBalanceRaw, coopDecimals)}{" "}
-                      {coopSymbol}
-                    </span>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent>
-                  {toLocalString(liquidBalanceRaw)} {coopSymbol}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">
+                {m.profile_liquid_balance()}
+              </span>
+              <span>
+                <Amount
+                  value={liquidBalanceRaw}
+                  decimals={coopDecimals}
+                  symbol={coopSymbol}
+                />{" "}
+                {coopSymbol}
+              </span>
+            </div>
           </CollapsibleContent>
         </Collapsible>
 
