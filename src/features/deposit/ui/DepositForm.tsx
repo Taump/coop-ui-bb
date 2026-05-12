@@ -18,7 +18,7 @@ import { tooManyDecimals } from "#/shared/lib/tooManyDecimals";
 import { useCoopState } from "#/entities/coop";
 import { useAssetInfo } from "#/entities/token";
 import { useWallet } from "#/entities/user";
-import { useEffectiveReferrer } from "#/features/referrals";
+import { useEffectiveReferrer } from "#/entities/referrer";
 
 import { buildDepositLink } from "../lib/buildDepositLink";
 import {

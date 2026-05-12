@@ -1,12 +1,11 @@
-import { Fragment, type FC } from "react";
+import { Fragment } from "react";
+import type { FC } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "#/shared/ui/card";
 import { Separator } from "#/shared/ui/separator";
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { formatDateShort } from "#/shared/lib/formatDateShort";
-import { getVotesDivisor } from "#/shared/lib/votesScale";
-
-import { useVotesReceived } from "#/entities/coop";
+import { getVotesDivisor, useVotesReceived } from "#/entities/coop";
 import { useDisplayName, UserDisplayName } from "#/entities/attestation";
 
 import * as m from "#/paraglide/messages";

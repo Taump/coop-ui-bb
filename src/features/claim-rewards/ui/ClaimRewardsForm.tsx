@@ -14,10 +14,8 @@ import {
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { formatRounded } from "#/shared/lib/formatRounded";
 import { formatDateShort } from "#/shared/lib/formatDateShort";
-import { getNewUnlockDate } from "#/shared/lib/getNewUnlockDate";
-
 import type { CoopUser } from "#/entities/coop";
-import { useCoopState } from "#/entities/coop";
+import { useCoopState, getNewUnlockDate } from "#/entities/coop";
 import { useAssetInfo } from "#/entities/token";
 
 import { buildClaimRewardsLink } from "../lib/buildClaimRewardsLink";

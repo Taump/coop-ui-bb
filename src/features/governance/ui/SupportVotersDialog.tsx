@@ -12,10 +12,13 @@ import {
 import { ScrollArea } from "#/shared/ui/scroll-area";
 import { Separator } from "#/shared/ui/separator";
 import { toLocalString } from "#/shared/lib/toLocalString";
-import { getVotesDivisor } from "#/shared/lib/votesScale";
-import { formatParamName } from "#/shared/lib/formatParamName";
+import { getVotesDivisor } from "#/entities/coop";
 import { UserDisplayName } from "#/entities/attestation";
-import { governanceStore, extractVoters } from "#/entities/governance";
+import {
+  formatParamName,
+  governanceStore,
+  extractVoters,
+} from "#/entities/governance";
 import type { ParsedGovernanceParam, Voter } from "#/entities/governance";
 
 import { ParamValue } from "./ParamValue";

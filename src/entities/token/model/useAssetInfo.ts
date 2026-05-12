@@ -5,14 +5,12 @@ import { assetMetadataStore } from "./store";
 export function useAssetInfo(coopAsset: string | undefined) {
   const assetMetadata = useStore(assetMetadataStore, (s) => s);
 
-  const coopDecimals = coopAsset
-    ? (assetMetadata[coopAsset]?.decimals ?? 0)
-    : 0;
-  const gbyteDecimals = assetMetadata["base"].decimals ?? 9;
-  const coopSymbol = coopAsset
-    ? (assetMetadata[coopAsset]?.symbol ?? "COOP")
-    : "COOP";
-  const gbyteSymbol = assetMetadata["base"].symbol ?? "GBYTE";
+  const coopEntry = coopAsset ? assetMetadata[coopAsset] : undefined;
+  const baseEntry = assetMetadata["base"];
+  const coopDecimals = coopEntry?.decimals ?? 0;
+  const gbyteDecimals = baseEntry.decimals ?? 9;
+  const coopSymbol = coopEntry?.symbol ?? "COOP";
+  const gbyteSymbol = baseEntry.symbol ?? "GBYTE";
 
   return { coopAsset, coopDecimals, gbyteDecimals, coopSymbol, gbyteSymbol };
 }

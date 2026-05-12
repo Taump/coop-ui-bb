@@ -1,4 +1,5 @@
 import { Store } from "@tanstack/store";
+import obyte from "obyte";
 import { storageKey } from "#/shared/lib/storageKey";
 
 const STORAGE_KEY = storageKey("referrer_address");
@@ -10,7 +11,11 @@ interface ReferrerState {
 function loadFromStorage(): ReferrerState {
   try {
     const address = localStorage.getItem(STORAGE_KEY);
-    return { address };
+    if (address && obyte.utils.isValidAddress(address)) {
+      return { address };
+    }
+    if (address) localStorage.removeItem(STORAGE_KEY);
+    return { address: null };
   } catch {
     return { address: null };
   }

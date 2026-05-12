@@ -39,7 +39,7 @@ export function DepositDescription({
                 <a
                   href={attestationLinks.telegram}
                   target="_blank"
-                  rel="noopener"
+                  rel="noopener noreferrer"
                   className={linkClass}
                 >
                   {m.deposit_desc_telegram()}
@@ -51,7 +51,7 @@ export function DepositDescription({
                     <a
                       href={attestationLinks.discord}
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                       className={linkClass}
                     >
                       {m.deposit_desc_discord()}
@@ -88,7 +88,7 @@ export function DepositDescription({
                     <a
                       href={attestationLinks.realName}
                       target="_blank"
-                      rel="noopener"
+                      rel="noopener noreferrer"
                       className={linkClass}
                     >
                       {m.deposit_desc_real_name_link()}

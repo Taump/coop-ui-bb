@@ -61,13 +61,26 @@ export function ConnectWalletDialog({
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{m.wallet_add()}</DialogTitle>
-          <DialogDescription
-            dangerouslySetInnerHTML={{
-              __html: m.wallet_description({
-                link: `<a href="https://obyte.org/#download" target="_blank" rel="noopener" class="font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground">${m.wallet_link_text()}</a>`,
-              }),
-            }}
-          />
+          <DialogDescription>
+            {m
+              .wallet_description({ link: "[LINK]" })
+              .split("[LINK]")
+              .map((part, i, parts) => (
+                <span key={i}>
+                  {part}
+                  {i < parts.length - 1 && (
+                    <a
+                      href="https://obyte.org/#download"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground"
+                    >
+                      {m.wallet_link_text()}
+                    </a>
+                  )}
+                </span>
+              ))}
+          </DialogDescription>
         </DialogHeader>
         <div
           className="flex flex-col gap-2"

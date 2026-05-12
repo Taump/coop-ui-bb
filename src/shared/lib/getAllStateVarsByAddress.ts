@@ -12,7 +12,6 @@ export const getAllStateVarsByAddress = async (
   for (let i = 0; i < MAX_ITERATIONS; i++) {
     const chunkData = (await client.api.getAaStateVars({
       address,
-      // @ts-expect-error — var_prefix_from is not in the obyte client types
       ...(lastKey && { var_prefix_from: lastKey }),
     })) as AaStateVars;
 

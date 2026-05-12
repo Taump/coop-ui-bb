@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Info } from "lucide-react";
 import * as m from "#/paraglide/messages";
 
-import { formatParamName } from "#/shared/lib/formatParamName";
-import { getParamDescription } from "#/shared/lib/getParamDescription";
+import { formatParamName, getParamDescription } from "#/entities/governance";
 
 import {
   Card,
@@ -21,7 +20,7 @@ import {
 import { QRButton } from "#/shared/ui/qr-button";
 
 import { toLocalString } from "#/shared/lib/toLocalString";
-import { getVotesDivisor } from "#/shared/lib/votesScale";
+import { getVotesDivisor } from "#/entities/coop";
 import type { ParsedGovernanceParam } from "#/entities/governance";
 
 import { buildCommitLink } from "../lib/buildGovernanceLink";

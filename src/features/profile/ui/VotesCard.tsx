@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 import { Card, CardContent, CardTitle } from "#/shared/ui/card";
 import { toLocalString } from "#/shared/lib/toLocalString";
-import { getVotesDivisor } from "#/shared/lib/votesScale";
+import { getVotesDivisor } from "#/entities/coop";
 
 import * as m from "#/paraglide/messages";
 

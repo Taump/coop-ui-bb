@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 
 import { useCoopState } from "#/entities/coop";
-import { setReferrer } from "#/entities/referrer";
+import { setReferrer, getReferrerFromUrl } from "#/entities/referrer";
 import { useWallet } from "#/entities/user";
-import { getReferrerFromUrl } from "#/shared/lib/getReferrerFromUrl";
 
 /**
  * Picks up a referrer candidate from the URL (path or `?ref=` query) when the

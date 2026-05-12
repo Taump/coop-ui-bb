@@ -14,3 +14,5 @@ export type {
 export { extractVoters } from "./lib/extractVoters";
 export type { Voter } from "./lib/extractVoters";
 export { getValueKey, needsHash } from "./lib/getValueKey";
+export { formatParamName } from "./lib/formatParamName";
+export { getParamDescription } from "./lib/getParamDescription";

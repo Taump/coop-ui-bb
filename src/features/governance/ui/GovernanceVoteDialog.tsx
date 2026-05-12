@@ -16,8 +16,7 @@ import {
 } from "#/shared/ui/dialog";
 import { QRButton } from "#/shared/ui/qr-button";
 import type { ParsedGovernanceParam } from "#/entities/governance";
-import { formatParamName } from "#/shared/lib/formatParamName";
-import { getParamDescription } from "#/shared/lib/getParamDescription";
+import { formatParamName, getParamDescription } from "#/entities/governance";
 
 import { buildVoteLink } from "../lib/buildGovernanceLink";
 import { toDisplayValue, toAAValue } from "../lib/formatParamValue";

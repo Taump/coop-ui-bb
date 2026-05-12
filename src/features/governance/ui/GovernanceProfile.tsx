@@ -50,7 +50,7 @@ export function GovernanceProfile({ connectWallet }: GovernanceProfileProps) {
           <a
             href={getExplorerUrl(address, "address")}
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
             className="font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground"
           >
             {address.slice(0, 6)}...{address.slice(-6)}

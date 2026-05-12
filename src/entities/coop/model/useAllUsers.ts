@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useStore } from "@tanstack/react-store";
 
 import { coopStore } from "./store";
-import type { CoopUser } from "./types";
+import { parseCoopUser } from "./schemas";
 
 export interface LeaderboardUser {
   address: string;
@@ -23,8 +23,8 @@ export function extractTopUsers(
   for (const key in vars) {
     if (!key.startsWith(USER_PREFIX)) continue;
 
-    const user = vars[key] as CoopUser | null;
-    if (user == null || typeof user.total_balance !== "number") continue;
+    const user = parseCoopUser(vars[key]);
+    if (!user) continue;
 
     users.push({
       address: key.slice(USER_PREFIX.length),

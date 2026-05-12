@@ -2,9 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import * as m from "#/paraglide/messages";
 
 import { Card } from "#/shared/ui/card";
-import { KitIllustration } from "#/shared/ui/illustrations/kit-illustration";
-import { VisualizationIllustration } from "#/shared/ui/illustrations/visualization-illustration";
-import { ScheduleIllustation } from "#/shared/ui/illustrations/schedule-illustration";
+import {
+  KitIllustration,
+  VisualizationIllustration,
+  ScheduleIllustation,
+} from "#/widgets/hero-illustrations";
 import { DepositForm } from "#/features/deposit";
 
 const INDEX_TITLE = "Obyte COOP — Cooperative Token on Obyte";

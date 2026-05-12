@@ -4,7 +4,7 @@ import { ArrowDown, Info } from "lucide-react";
 import * as m from "#/paraglide/messages";
 
 import { toLocalString } from "#/shared/lib/toLocalString";
-import { getVotesDivisor } from "#/shared/lib/votesScale";
+import { getVotesDivisor } from "#/entities/coop";
 import { useAttestations } from "#/entities/attestation";
 import {
   Tooltip,

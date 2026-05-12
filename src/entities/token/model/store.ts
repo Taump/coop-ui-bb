@@ -1,14 +1,19 @@
 import { Store } from "@tanstack/store";
+import { z } from "zod";
 import { storageKey } from "#/shared/lib/storageKey";
 
 const STORAGE_KEY = storageKey("asset_metadata");
 const STORAGE_TS_KEY = storageKey("asset_metadata_ts");
 const CACHE_TTL = 7 * 24 * 60 * 60 * 1000; // 7 days
 
-export interface AssetMetadata {
-  symbol: string | null;
-  decimals: number | null;
-}
+const assetMetadataSchema = z.object({
+  symbol: z.string().nullable(),
+  decimals: z.number().nullable(),
+});
+
+const assetMetadataMapSchema = z.record(z.string(), assetMetadataSchema);
+
+export type AssetMetadata = z.infer<typeof assetMetadataSchema>;
 
 type AssetMetadataMap = Record<string, AssetMetadata>;
 
@@ -30,7 +35,10 @@ function loadFromStorage(): AssetMetadataMap {
   try {
     if (!isCacheValid()) return { ...DEFAULT_TOKENS };
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return { ...DEFAULT_TOKENS, ...JSON.parse(raw) };
+    if (!raw) return { ...DEFAULT_TOKENS };
+    const parsed = assetMetadataMapSchema.safeParse(JSON.parse(raw));
+    if (!parsed.success) return { ...DEFAULT_TOKENS };
+    return { ...DEFAULT_TOKENS, ...parsed.data };
   } catch {}
   return { ...DEFAULT_TOKENS };
 }

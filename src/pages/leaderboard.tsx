@@ -44,7 +44,7 @@ function Leaderboard() {
           coopDecimals={coopDecimals}
           gbyteDecimals={gbyteDecimals}
           coopSymbol={coopSymbol}
-          connectedAddress={address}
+          connectedAddress={address ?? undefined}
         />
       ) : (
         <LeaderboardSkeleton />
