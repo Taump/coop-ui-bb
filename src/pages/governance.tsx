@@ -13,7 +13,22 @@ import {
   GovernanceParamListSkeleton,
 } from "#/features/governance";
 
+const GOVERNANCE_TITLE = "Governance — Obyte COOP";
+const GOVERNANCE_DESCRIPTION =
+  "Vote on COOP protocol parameters: emission rates, referral rewards, attestors, and more. Quadratic voting with a 3-day challenging period.";
+
 export const Route = createFileRoute("/governance")({
+  head: () => ({
+    meta: [
+      { title: GOVERNANCE_TITLE },
+      { name: "description", content: GOVERNANCE_DESCRIPTION },
+      { property: "og:title", content: GOVERNANCE_TITLE },
+      { property: "og:description", content: GOVERNANCE_DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: GOVERNANCE_TITLE },
+      { name: "twitter:description", content: GOVERNANCE_DESCRIPTION },
+    ],
+  }),
   component: Governance,
 });
 

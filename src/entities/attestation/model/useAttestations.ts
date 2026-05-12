@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { queryOptions, useQuery } from "@tanstack/react-query";
 
 import client from "#/shared/api/obyte";
 import { attestors } from "#/shared/config/appConfig";
@@ -61,9 +61,9 @@ function parseAttestations(raw: RawAttestation[]): ParsedAttestations {
   return { telegram, discord, realName, displayName };
 }
 
-export function useAttestations(address: string | undefined) {
-  return useQuery({
-    queryKey: ["attestations", address],
+export function attestationsQueryOptions(address: string | undefined) {
+  return queryOptions({
+    queryKey: ["attestations", address] as const,
     queryFn: async (): Promise<ParsedAttestations> => {
       const cached = readCache(address!);
       if (cached) return cached;
@@ -78,4 +78,8 @@ export function useAttestations(address: string | undefined) {
     enabled: !!address,
     staleTime: CACHE_TTL,
   });
+}
+
+export function useAttestations(address: string | undefined) {
+  return useQuery(attestationsQueryOptions(address));
 }

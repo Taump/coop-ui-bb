@@ -6,7 +6,22 @@ import { useCoopState, useAllUsers } from "#/entities/coop";
 import { useAssetInfo } from "#/entities/token";
 import { LeaderboardTable, LeaderboardSkeleton } from "#/features/leaderboard";
 
+const LEADERBOARD_TITLE = "Leaderboard — Obyte COOP";
+const LEADERBOARD_DESCRIPTION =
+  "Top COOP cooperative members ranked by locked balance and votes received.";
+
 export const Route = createFileRoute("/leaderboard")({
+  head: () => ({
+    meta: [
+      { title: LEADERBOARD_TITLE },
+      { name: "description", content: LEADERBOARD_DESCRIPTION },
+      { property: "og:title", content: LEADERBOARD_TITLE },
+      { property: "og:description", content: LEADERBOARD_DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: LEADERBOARD_TITLE },
+      { name: "twitter:description", content: LEADERBOARD_DESCRIPTION },
+    ],
+  }),
   component: Leaderboard,
 });
 

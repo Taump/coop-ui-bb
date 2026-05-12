@@ -7,7 +7,24 @@ import { VisualizationIllustration } from "#/shared/ui/illustrations/visualizati
 import { ScheduleIllustation } from "#/shared/ui/illustrations/schedule-illustration";
 import { DepositForm } from "#/features/deposit";
 
-export const Route = createFileRoute("/")({ component: App });
+const INDEX_TITLE = "Obyte COOP — Cooperative Token on Obyte";
+const INDEX_DESCRIPTION =
+  "Lock COOP or GBYTE to earn daily emissions, vote for contributors, and participate in governance of the Obyte cooperative.";
+
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: INDEX_TITLE },
+      { name: "description", content: INDEX_DESCRIPTION },
+      { property: "og:title", content: INDEX_TITLE },
+      { property: "og:description", content: INDEX_DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { name: "twitter:title", content: INDEX_TITLE },
+      { name: "twitter:description", content: INDEX_DESCRIPTION },
+    ],
+  }),
+  component: App,
+});
 
 function HeroSection() {
   const titleParts = m

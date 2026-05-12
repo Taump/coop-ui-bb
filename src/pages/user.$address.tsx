@@ -14,6 +14,7 @@ import { useWallet } from "#/entities/user";
 import { useCoopState } from "#/entities/coop";
 import type { CoopUser } from "#/entities/coop";
 import { useAssetInfo } from "#/entities/token";
+import { attestationsQueryOptions } from "#/entities/attestation";
 import {
   ProfileHeader,
   BalanceCard,
@@ -30,6 +31,30 @@ import { ClaimRewardsDialog } from "#/features/claim-rewards";
 import { ReferralLinkCard } from "#/features/referrals";
 
 export const Route = createFileRoute("/user/$address")({
+  loader: async ({ params, context }) => {
+    const data = await context.queryClient.ensureQueryData(
+      attestationsQueryOptions(params.address),
+    );
+    return { displayName: data.displayName };
+  },
+  head: ({ params, loaderData }) => {
+    const a = params.address;
+    const short = `${a.slice(0, 6)}...${a.slice(-4)}`;
+    const name = loaderData?.displayName ?? short;
+    const title = `${name} — Obyte COOP`;
+    const description = `COOP profile for ${name} (${a}): balances, rewards, and votes.`;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "profile" },
+        { name: "twitter:title", content: title },
+        { name: "twitter:description", content: description },
+      ],
+    };
+  },
   component: UserProfile,
 });
 
