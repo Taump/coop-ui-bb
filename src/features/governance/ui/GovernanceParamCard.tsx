@@ -222,7 +222,7 @@ export function GovernanceParamCard({
                       <td className="px-3 py-2 text-right text-xs">
                         <button
                           onClick={() => openSupportDialog(s.valueKey)}
-                          className="cursor-pointer text-muted-foreground underline underline-offset-4 hover:text-foreground"
+                          className="cursor-pointer link"
                         >
                           {toLocalString(s.support / votesDivisor)}
                         </button>
@@ -231,7 +231,7 @@ export function GovernanceParamCard({
                         <button
                           onClick={() => openDialog(s.valueKey)}
                           disabled={!address}
-                          className="cursor-pointer text-xs text-foreground underline underline-offset-4 hover:text-muted-foreground disabled:pointer-events-none disabled:opacity-50"
+                          className="cursor-pointer text-xs font-medium link disabled:pointer-events-none disabled:opacity-50"
                         >
                           {m.governance_param_vote_for_value()}
                         </button>
@@ -248,7 +248,7 @@ export function GovernanceParamCard({
           <button
             onClick={() => openDialog()}
             disabled={!address}
-            className="cursor-pointer text-sm font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground disabled:pointer-events-none disabled:opacity-50"
+            className="cursor-pointer text-sm font-medium link disabled:pointer-events-none disabled:opacity-50"
           >
             {m.governance_param_suggest_value()}
           </button>

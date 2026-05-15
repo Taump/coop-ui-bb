@@ -52,7 +52,7 @@ function getEligibilityTooltip(
 }
 
 const linkClass =
-  "font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground";
+  "font-medium link";
 
 function escapeRegex(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -163,7 +163,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
             href={getExplorerUrl(address, "address")}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-mono text-sm text-muted-foreground underline-offset-4 hover:underline"
+            className="font-mono text-sm link"
           >
             {address}
           </a>
@@ -198,7 +198,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
               href={getContactUrl(tgUsername, "telegram")}
               target="_blank"
               rel="noopener noreferrer"
-              className="underline-offset-4 hover:underline"
+              className="font-medium link"
             >
               {tgUsername}
             </a>
@@ -238,7 +238,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
                   href={dcUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline-offset-4 hover:underline"
+                  className="font-medium link"
                 >
                   {discordUsername}
                 </a>

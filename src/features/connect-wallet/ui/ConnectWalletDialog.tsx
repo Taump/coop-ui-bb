@@ -73,7 +73,7 @@ export function ConnectWalletDialog({
                       href="https://obyte.org/#download"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground"
+                      className="font-medium link"
                     >
                       {m.wallet_link_text()}
                     </a>

@@ -33,7 +33,7 @@ export function ParamValue({
             href={getExplorerUrl(addr, "address")}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline-offset-4 hover:underline"
+            className="font-medium link"
           >
             {addr.slice(0, 4)}...{addr.slice(-4)}
           </a>

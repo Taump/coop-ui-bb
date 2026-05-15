@@ -94,7 +94,7 @@ export const QRButton = forwardRef<HTMLButtonElement, QRButtonProps>(
                     return (
                       <a
                         key={i}
-                        className="underline underline-offset-4"
+                        className="font-medium link"
                         rel="noopener noreferrer"
                         target="_blank"
                         href="https://itunes.apple.com/us/app/byteball/id1147137332?ls=1&mt=8"
@@ -107,7 +107,7 @@ export const QRButton = forwardRef<HTMLButtonElement, QRButtonProps>(
                     return (
                       <a
                         key={i}
-                        className="underline underline-offset-4"
+                        className="font-medium link"
                         rel="noopener noreferrer"
                         target="_blank"
                         href="https://play.google.com/store/apps/details?id=org.byteball.wallet"

@@ -89,7 +89,7 @@ export function ReplaceForm({ user }: ReplaceFormProps) {
               type="button"
               onClick={setMax}
               disabled={!isLoaded || maxCoopDisplay <= 0}
-              className="cursor-pointer text-xs text-muted-foreground underline-offset-4 hover:text-foreground hover:underline disabled:cursor-not-allowed disabled:opacity-50 disabled:no-underline"
+              className="cursor-pointer text-xs font-medium link disabled:cursor-not-allowed disabled:opacity-50"
             >
               {m.replace_max()}: {formatRounded(maxCoopDisplay, 4)}{" "}
               {coopSymbol}

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 
-const linkClassName = "underline underline-offset-4 hover:text-foreground";
+const linkClassName = "link";
 
 export const paraglideMarkup = {
   link: ({

@@ -173,7 +173,7 @@ export const RewardsCard: FC<RewardsCardProps> = ({
                 <Link
                   to="/user/$address"
                   params={{ address: user.ref }}
-                  className="font-mono underline-offset-4 hover:underline"
+                  className="font-mono font-medium link"
                 >
                   {user.ref.slice(0, 6)}...{user.ref.slice(-4)}
                 </Link>

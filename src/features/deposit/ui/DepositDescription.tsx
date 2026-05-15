@@ -18,7 +18,7 @@ interface DepositDescriptionProps {
 }
 
 const linkClass =
-  "font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground";
+  "font-medium link";
 
 export function DepositDescription({
   isLoaded,

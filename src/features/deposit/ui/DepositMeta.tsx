@@ -101,7 +101,7 @@ export function DepositMeta({
             href={getExplorerUrl(referrer, "address")}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground"
+            className="font-medium link"
           >
             {referrer.slice(0, 6)}...{referrer.slice(-6)}
           </a>

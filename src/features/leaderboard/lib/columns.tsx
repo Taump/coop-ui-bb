@@ -30,7 +30,7 @@ function AddressCell({ address, isYou }: { address: string; isYou: boolean }) {
       <Link
         to="/user/$address"
         params={{ address }}
-        className="underline-offset-4 hover:underline"
+        className="font-medium link"
       >
         {displayName ?? (
           <span className="font-mono">

@@ -59,7 +59,7 @@ function Governance() {
                   <span key={i}>
                     {i > 0 && (
                       <ConnectWalletDialog>
-                        <button className="cursor-pointer font-medium text-foreground underline underline-offset-4 hover:text-muted-foreground">
+                        <button className="cursor-pointer font-medium link">
                           {m.wallet_add()}
                         </button>
                       </ConnectWalletDialog>
