@@ -32,8 +32,8 @@ export function Header() {
               className="bg-size-[4px_1px] absolute inset-x-0 bottom-0 h-px bg-[linear-gradient(90deg,var(--color-foreground)_1px,transparent_1px)] bg-repeat-x opacity-20"
             />
             <div className="flex items-center gap-8">
-              <Link to="/" className="text-lg font-bold">
-                COOP
+              <Link to="/" className="flex items-center">
+                <img src="/logo.svg" alt="COOP" className="h-11" />
                 {env.VITE_TESTNET && (
                   <sup className="ml-0.5 text-[10px] font-normal text-muted-foreground">
                     testnet
