@@ -134,7 +134,7 @@
   "hero_label": "合作社区",
   "hero_title": "为社区{contributing}赚取奖励",
   "hero_contributing": "贡献",
-  "hero_subtitle": "锁定代币，为贡献者投票，并获得每日发行奖励。全部由社区治理。",
+  "hero_subtitle": "锁定代币、为贡献者投票、参与贡献，并获得每日发行奖励。全部由致力于帮助 {#link}Obyte{/link} 获得最具抗审查加密资产认可的社区治理。",
   "governance_connect_wallet_intro": "{wallet} 查看您的投票权并对参数变更投票。",
   "governance_profile_wallet": "钱包：",
   "governance_profile_balance": "余额",

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ParaglideMessage } from "@inlang/paraglide-js-react";
 import * as m from "#/paraglide/messages";
 
 import { Card } from "#/shared/ui/card";
@@ -43,7 +44,22 @@ function HeroSection() {
               {m.hero_title({ contributing: m.hero_contributing() })}
             </h1>
             <p className="text-muted-foreground mt-6 text-balance text-lg">
-              {m.hero_subtitle()}
+              <ParaglideMessage
+                message={m.hero_subtitle}
+                inputs={{}}
+                markup={{
+                  link: ({ children }) => (
+                    <a
+                      href="https://obyte.org"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="link font-medium"
+                    >
+                      {children}
+                    </a>
+                  ),
+                }}
+              />
             </p>
           </div>
           <div className="ring-foreground/10 rounded-2xl border border-border/50 bg-card/50 p-6 shadow-xl shadow-black/10 ring-1 backdrop-blur">
