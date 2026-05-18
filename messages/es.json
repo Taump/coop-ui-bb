@@ -112,7 +112,6 @@
   "deposit_desc_telegram": "Telegram",
   "deposit_desc_discord": "Discord",
   "deposit_desc_real_name_link": "atestado con nombre real",
-  "deposit_meta_locked_until": "Bloqueado hasta",
   "deposit_meta_equivalent": "Equivalente en {symbol}",
   "deposit_meta_total_coop": "Balance total de {symbol}",
   "deposit_meta_total_gbyte": "Balance total de {symbol}",

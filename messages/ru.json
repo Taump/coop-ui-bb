@@ -112,7 +112,6 @@
   "deposit_desc_telegram": "Telegram",
   "deposit_desc_discord": "Discord",
   "deposit_desc_real_name_link": "аттестацию реального имени",
-  "deposit_meta_locked_until": "Заблокировано до",
   "deposit_meta_equivalent": "Эквивалент {symbol}",
   "deposit_meta_total_coop": "Общий баланс {symbol}",
   "deposit_meta_total_gbyte": "Общий баланс {symbol}",

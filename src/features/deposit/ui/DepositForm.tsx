@@ -320,7 +320,6 @@ export function DepositForm() {
                 isValid={isValid}
                 href={href}
                 label={label}
-                unlockDate={values.unlockDate}
                 coopSymbol={coopSymbol}
                 coopEquivalent={coopEquivalent}
                 newCoopBalance={newCoopBalance}

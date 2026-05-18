@@ -112,7 +112,6 @@
   "deposit_desc_telegram": "Telegram",
   "deposit_desc_discord": "Discord",
   "deposit_desc_real_name_link": "实名认证",
-  "deposit_meta_locked_until": "锁定至",
   "deposit_meta_equivalent": "{symbol} 等值",
   "deposit_meta_total_coop": "{symbol} 总余额",
   "deposit_meta_total_gbyte": "{symbol} 总余额",

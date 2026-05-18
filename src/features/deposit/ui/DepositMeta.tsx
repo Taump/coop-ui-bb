@@ -3,7 +3,6 @@ import type { RefObject } from "react";
 import { QRButton } from "#/shared/ui/qr-button";
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { getExplorerUrl } from "#/shared/lib/getExplorerUrl";
-import { getLocale } from "#/shared/i18n";
 
 import * as m from "#/paraglide/messages";
 
@@ -20,7 +19,6 @@ interface DepositMetaProps {
   isValid: boolean;
   href: string | null;
   label: string;
-  unlockDate: Date;
   coopSymbol: string;
   coopEquivalent: number | null;
   newCoopBalance: number;
@@ -35,7 +33,6 @@ export function DepositMeta({
   isValid,
   href,
   label,
-  unlockDate,
   coopSymbol,
   coopEquivalent,
   newCoopBalance,
@@ -46,16 +43,6 @@ export function DepositMeta({
 }: DepositMetaProps) {
   return (
     <div className="mt-3 flex flex-col gap-2">
-      <div className="flex justify-between text-sm text-muted-foreground">
-        <span>{m.deposit_meta_locked_until()}</span>
-        <span className="font-medium text-foreground">
-          {unlockDate.toLocaleDateString(getLocale(), {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </span>
-      </div>
       {coopEquivalent !== null && (
         <div className="flex justify-between text-sm text-muted-foreground">
           <span>{m.deposit_meta_equivalent({ symbol: coopSymbol })}</span>
