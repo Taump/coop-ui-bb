@@ -3,6 +3,12 @@ import type { FC } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "#/shared/ui/card";
 import { Separator } from "#/shared/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "#/shared/ui/tooltip";
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { formatDateShort } from "#/shared/lib/formatDateShort";
 import { getVotesDivisor, useVotesGiven } from "#/entities/coop";
@@ -43,16 +49,32 @@ export const VotesGivenList: FC<VotesGivenListProps> = ({
                 </div>
                 <div className="flex items-center justify-end gap-2">
                   {record.toAddress === address && (
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
-                      {m.vote_list_self()}
-                    </span>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
+                            {m.vote_list_self()}
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>{m.vote_self()}</TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   )}
                   {typeof record.strength === "number" && (
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
-                      {m.vote_list_strength({
-                        n: String(record.strength),
-                      })}
-                    </span>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
+                            {m.vote_list_strength({
+                              n: String(record.strength),
+                            })}
+                          </span>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          {m.vote_list_strength_tooltip()}
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   )}
                 </div>
                 <span className="text-right tabular-nums text-muted-foreground">
