@@ -186,7 +186,7 @@
   "faq_what_is_coop_q": "什么是 Coop？",
   "faq_what_is_coop_a": "Coop 是一个由帮助 {#link to=|https://obyte.org|}Obyte{/link} 发展的贡献者组成的合作社区。各种技术、财务和社交贡献都通过社区成员为贡献者投票的方式获得认可，之后每日发行的 COOP 代币会根据投票结果进行分配。",
   "faq_purpose_q": "Coop 的目的是什么？",
-  "faq_purpose_a": "目的是表彰那些为 {#link to=|https://obyte.org|}Obyte{/link} 不可审查、不可阻止且真正去中心化网络的发展与传播做出贡献的人，并鼓励新的贡献。",
+  "faq_purpose_a": "目的是表彰那些为 {#link to=|https://obyte.org|}Obyte 不可审查、不可阻止且真正去中心化网络{/link}的发展与传播做出贡献的人，并鼓励新的贡献。",
   "faq_how_to_start_q": "我该如何开始？",
   "faq_how_to_start_a": "先存入并锁定一些 {symbol} 或 GBYTE。锁定的数量决定了你投票的权重以及你奖励的两部分之一。\n\n资金将至少锁定 1 年。你需要将你的 Obyte 地址与 {#link to=$telegramBot}Telegram{/link} 和/或 {#link to=$discordBot}Discord{/link} 帐号绑定，这样其他社区成员在公开讨论中看到你时就能识别你，并为你投票。如果你存入的数量少于 {minBalance} {symbol}，你还必须完成 {#link to=$realNameBot}实名认证{/link}，以确保「一人一账户」规则。\n\n然后，加入我们的 {#link to=$telegramCommunity}Telegram{/link} 和 {#link to=$discordCommunity}Discord{/link} 社区，了解谁在做贡献。为他们投票。\n\n想想你自己可以如何做出贡献，并让社区知道你的贡献。如果他们觉得有价值，就会为你投票。",
   "faq_rewards_distribution_q": "{symbol} 奖励是如何分配的？",
