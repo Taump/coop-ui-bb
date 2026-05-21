@@ -61,12 +61,12 @@ export const RewardsCard: FC<RewardsCardProps> = ({
     !!user.ref;
 
   return (
-    <Card>
+    <Card className="relative">
+      {action && (
+        <div className="absolute right-3 top-3 z-10">{action}</div>
+      )}
       <CardContent>
-        <div className="-mr-3 flex items-start justify-between gap-2">
-          <CardTitle>{m.profile_rewards_title()}</CardTitle>
-          {action && <div className="-mt-2">{action}</div>}
-        </div>
+        <CardTitle>{m.profile_rewards_title()}</CardTitle>
         <Collapsible
           open={hasDetails && !collapsed}
           onOpenChange={() => hasDetails && setCollapsed(!collapsed)}

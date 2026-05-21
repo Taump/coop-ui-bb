@@ -28,6 +28,7 @@ import {
   VotesGivenList,
   ProfileSkeleton,
 } from "#/features/profile";
+import { Button } from "#/shared/ui/button";
 import { VoteButton } from "#/features/voting";
 import { DepositBanner, DepositDialog } from "#/features/deposit";
 import { ReplaceForm } from "#/features/replace";
@@ -94,13 +95,14 @@ function UserProfile() {
       <Tooltip>
         <DepositDialog>
           <TooltipTrigger asChild>
-            <button
-              type="button"
+            <Button
+              variant="secondary"
+              size="icon-sm"
               aria-label={m.profile_lock_more()}
-              className="flex cursor-pointer items-center justify-center rounded-full p-1 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+              className="rounded-full"
             >
-              <Plus className="size-4" />
-            </button>
+              <Plus />
+            </Button>
           </TooltipTrigger>
         </DepositDialog>
         <TooltipContent>{m.profile_lock_more()}</TooltipContent>
@@ -114,13 +116,14 @@ function UserProfile() {
         <Tooltip>
           <ClaimRewardsDialog user={user}>
             <TooltipTrigger asChild>
-              <button
-                type="button"
+              <Button
+                variant="secondary"
+                size="icon-sm"
                 aria-label={m.profile_claim_rewards_tooltip()}
-                className="flex cursor-pointer items-center justify-center rounded-full p-1 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                className="rounded-full"
               >
-                <HandCoins className="size-4" />
-              </button>
+                <HandCoins />
+              </Button>
             </TooltipTrigger>
           </ClaimRewardsDialog>
           <TooltipContent>{m.profile_claim_rewards_tooltip()}</TooltipContent>
