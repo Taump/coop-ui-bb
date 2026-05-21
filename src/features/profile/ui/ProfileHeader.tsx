@@ -54,7 +54,9 @@ function getEligibilityTooltip(
 }
 
 const linkClass =
-  "font-medium link";
+  "font-medium text-foreground transition-opacity hover:opacity-80";
+
+const communityLinkClass = "font-medium link";
 
 function escapeRegex(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -187,7 +189,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
               href={getContactUrl(tgUsername, "telegram")}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-medium link"
+              className={linkClass}
             >
               {tgUsername}
             </a>
@@ -215,7 +217,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
                   href={dcUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium link"
+                  className={linkClass}
                 >
                   {discordUsername}
                 </a>
@@ -270,7 +272,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
               href={obyteCommunityUrls.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className={linkClass}
+              className={communityLinkClass}
             >
               {m.profile_badge_telegram()}
             </a>
@@ -280,7 +282,7 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
               href={obyteCommunityUrls.discord}
               target="_blank"
               rel="noopener noreferrer"
-              className={linkClass}
+              className={communityLinkClass}
             >
               {m.profile_badge_discord()}
             </a>
