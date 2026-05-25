@@ -21,7 +21,9 @@ export interface LiveUserBalances {
  * once a minute so values keep drifting visually even when no AA response
  * arrives (matches the cadence of governance Countdown).
  */
-export function useLiveUserBalances(user: CoopUser): LiveUserBalances {
+export function useLiveUserBalances(
+  user: CoopUser | undefined,
+): LiveUserBalances {
   const { getAaState, getParam, getCeilingPrice } = useCoopState();
 
   const [, setTick] = useState(0);
@@ -36,11 +38,11 @@ export function useLiveUserBalances(user: CoopUser): LiveUserBalances {
   const stored = {
     pendingLocked: 0,
     pendingLiquid: 0,
-    liveBalance: user.balance,
-    liveTotalBalance: user.total_balance,
-    liveLiquidBalance: user.liquid_balance ?? 0,
+    liveBalance: user?.balance ?? 0,
+    liveTotalBalance: user?.total_balance ?? 0,
+    liveLiquidBalance: user?.liquid_balance ?? 0,
   };
-  if (!aaState || ceilingPrice === undefined) return stored;
+  if (!user || !aaState || ceilingPrice === undefined) return stored;
 
   const pending = computePendingEmissions(
     user,

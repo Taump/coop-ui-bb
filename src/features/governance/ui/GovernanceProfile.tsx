@@ -13,7 +13,7 @@ import {
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { getExplorerUrl } from "#/shared/lib/getExplorerUrl";
 import { useWallet } from "#/entities/user";
-import { useCoopState } from "#/entities/coop";
+import { useCoopState, useLiveUserBalances } from "#/entities/coop";
 import { useAssetInfo } from "#/entities/token";
 
 interface GovernanceProfileProps {
@@ -24,6 +24,8 @@ export function GovernanceProfile({ connectWallet }: GovernanceProfileProps) {
   const { address, isConnected } = useWallet();
   const { constants, getUser } = useCoopState();
   const { coopDecimals, coopSymbol } = useAssetInfo(constants?.asset);
+  const user = address ? getUser(address) : undefined;
+  const { liveTotalBalance } = useLiveUserBalances(user);
   const coopDivisor = 10 ** coopDecimals;
 
   if (!isConnected || !address) {
@@ -36,8 +38,7 @@ export function GovernanceProfile({ connectWallet }: GovernanceProfileProps) {
     );
   }
 
-  const user = getUser(address);
-  const totalBalance = user?.total_balance ?? 0;
+  const totalBalance = liveTotalBalance;
   const votingPower = Math.sqrt(totalBalance / coopDivisor);
 
   return (
