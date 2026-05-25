@@ -62,7 +62,7 @@ function HeroSection() {
               />
             </p>
           </div>
-          <div className="ring-foreground/10 rounded-2xl border border-border/50 bg-card/50 p-6 shadow-xl shadow-black/10 ring-1 backdrop-blur">
+          <div className="ring-foreground/10 rounded-2xl border border-border/50 bg-card/50 p-6 ring-1 backdrop-blur">
             <h2 className="mb-4 text-lg font-semibold">{m.deposit_title()}</h2>
             <DepositForm />
           </div>
@@ -85,42 +85,73 @@ function FeaturesSection() {
               {m.how_it_works_title()}
             </h2>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            <Card className="grid grid-rows-[auto_1fr] gap-6 rounded-2xl border border-border/50 p-6 shadow-lg shadow-black/10">
-              <div className="text-balance">
-                <h3 className="text-foreground font-semibold">
-                  {m.how_it_works_lock_title()}
-                </h3>
-                <p className="text-muted-foreground mt-2 text-sm">
-                  {m.how_it_works_lock_desc()}
-                </p>
+          <div className="mt-12 grid gap-4 md:grid-cols-3 md:grid-rows-2">
+            <Card className="relative overflow-hidden rounded-3xl border-0 bg-card p-7 md:col-span-2">
+              <div
+                aria-hidden
+                className="absolute -top-20 -right-10 size-64 rounded-full bg-emerald-500/10 blur-3xl"
+              />
+              <div className="relative grid items-center gap-6 md:grid-cols-[1fr_auto]">
+                <div className="text-balance">
+                  <span className="text-emerald-300/80 font-mono text-[11px] uppercase tracking-wider">
+                    01 · Lock
+                  </span>
+                  <h3 className="text-foreground mt-2 text-2xl font-semibold tracking-tight">
+                    {m.how_it_works_lock_title()}
+                  </h3>
+                  <p className="text-muted-foreground mt-2 text-sm">
+                    {m.how_it_works_lock_desc()}
+                  </p>
+                </div>
+                <KitIllustration />
               </div>
-              <KitIllustration />
             </Card>
 
-            <Card className="grid grid-rows-[auto_1fr] gap-6 rounded-2xl border border-border/50 p-6 shadow-lg shadow-black/10">
-              <div className="text-balance">
-                <h3 className="text-foreground font-semibold">
-                  {m.how_it_works_emission_title()}
-                </h3>
-                <p className="text-muted-foreground mt-2 text-sm">
-                  {m.how_it_works_emission_desc()}
-                </p>
+            <Card className="relative overflow-hidden rounded-3xl border-0 bg-card p-7 md:row-span-2">
+              <div
+                aria-hidden
+                className="absolute -top-20 -left-10 size-64 rounded-full bg-indigo-500/10 blur-3xl"
+              />
+              <div className="relative flex h-full flex-col gap-6">
+                <div className="text-balance">
+                  <span className="text-indigo-300/80 font-mono text-[11px] uppercase tracking-wider">
+                    03 · Vote
+                  </span>
+                  <h3 className="text-foreground mt-2 text-2xl font-semibold tracking-tight">
+                    {m.how_it_works_vote_title()}
+                  </h3>
+                  <p className="text-muted-foreground mt-2 text-sm">
+                    {m.how_it_works_vote_desc()}
+                  </p>
+                </div>
+                <div className="flex-1">
+                  <VisualizationIllustration />
+                </div>
               </div>
-              <ScheduleIllustation />
             </Card>
 
-            <Card className="md:col-span-2 grid gap-6 overflow-hidden rounded-2xl border border-border/50 p-6 shadow-lg shadow-black/10 md:grid-cols-2">
-              <div className="text-balance self-center">
-                <h3 className="text-foreground font-semibold">
-                  {m.how_it_works_vote_title()}
-                </h3>
-                <p className="text-muted-foreground mt-2 text-sm">
-                  {m.how_it_works_vote_desc()}
-                </p>
-              </div>
-              <div className="-mb-6 -mr-6 md:translate-y-4">
-                <VisualizationIllustration />
+            <Card className="relative overflow-hidden rounded-3xl border-0 bg-card p-7 md:col-span-2">
+              <div
+                aria-hidden
+                className="absolute -bottom-24 -right-16 size-72 rounded-full bg-sky-500/15 blur-3xl"
+              />
+              <div
+                aria-hidden
+                className="absolute -bottom-20 right-32 size-48 rounded-full bg-sky-400/10 blur-3xl"
+              />
+              <div className="relative grid items-center gap-6 md:grid-cols-[1fr_1.2fr]">
+                <div className="text-balance">
+                  <span className="text-sky-300/80 font-mono text-[11px] uppercase tracking-wider">
+                    02 · Earn
+                  </span>
+                  <h3 className="text-foreground mt-2 text-2xl font-semibold tracking-tight">
+                    {m.how_it_works_emission_title()}
+                  </h3>
+                  <p className="text-muted-foreground mt-2 text-sm">
+                    {m.how_it_works_emission_desc()}
+                  </p>
+                </div>
+                <ScheduleIllustation />
               </div>
             </Card>
           </div>
