@@ -93,10 +93,7 @@ function FeaturesSection() {
               />
               <div className="relative grid items-center gap-6 md:grid-cols-[1fr_auto]">
                 <div className="text-balance">
-                  <span className="text-emerald-300/80 font-mono text-[11px] uppercase tracking-wider">
-                    01 · Lock
-                  </span>
-                  <h3 className="text-foreground mt-2 text-2xl font-semibold tracking-tight">
+                  <h3 className="text-foreground text-2xl font-semibold tracking-tight">
                     {m.how_it_works_lock_title()}
                   </h3>
                   <p className="text-muted-foreground mt-2 text-sm">
@@ -118,10 +115,7 @@ function FeaturesSection() {
               />
               <div className="relative grid items-center gap-6 md:grid-cols-[1fr_1.2fr]">
                 <div className="text-balance">
-                  <span className="text-sky-300/80 font-mono text-[11px] uppercase tracking-wider">
-                    02 · Earn
-                  </span>
-                  <h3 className="text-foreground mt-2 text-2xl font-semibold tracking-tight">
+                  <h3 className="text-foreground text-2xl font-semibold tracking-tight">
                     {m.how_it_works_emission_title()}
                   </h3>
                   <p className="text-muted-foreground mt-2 text-sm">
@@ -139,10 +133,7 @@ function FeaturesSection() {
               />
               <div className="relative flex h-full flex-col gap-6">
                 <div className="text-balance">
-                  <span className="text-indigo-300/80 font-mono text-[11px] uppercase tracking-wider">
-                    03 · Vote
-                  </span>
-                  <h3 className="text-foreground mt-2 text-2xl font-semibold tracking-tight">
+                  <h3 className="text-foreground text-2xl font-semibold tracking-tight">
                     {m.how_it_works_vote_title()}
                   </h3>
                   <p className="text-muted-foreground mt-2 text-sm">

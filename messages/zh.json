@@ -126,7 +126,7 @@
   "how_it_works_lock_title": "锁定代币",
   "how_it_works_lock_desc": "锁定 COOP 或 GBYTE 至少 1 年，以获得投票权和发行份额。",
   "how_it_works_emission_title": "每日发行",
-  "how_it_works_emission_desc": "每天铸造新的 COOP — 锁定奖励增加您的余额，流动奖励可领取。",
+  "how_it_works_emission_desc": "每天铸造新的 COOP，并按收到的投票比例分配。锁定奖励增加您的余额，流动奖励可领取。",
   "how_it_works_vote_title": "投票并赚取",
   "how_it_works_vote_desc": "为有用的贡献者投票。锁定越多 — 投票越强。当他人为你投票时，你将获得奖励。投票 3 个月后过期。",
   "footer_built_on": "基于 {obyte} 构建",
