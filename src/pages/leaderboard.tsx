@@ -39,7 +39,9 @@ function Leaderboard() {
 
   return (
     <>
-      <h2 className="mb-6 text-2xl font-bold">{m.leaderboard_title()}</h2>
+      <h2 className="bg-linear-to-b from-foreground to-foreground bg-clip-text mb-6 pb-1 text-2xl font-semibold leading-tighter tracking-tighter text-transparent">
+        {m.leaderboard_title()}
+      </h2>
       {isLoaded ? (
         <LeaderboardTable
           users={users}

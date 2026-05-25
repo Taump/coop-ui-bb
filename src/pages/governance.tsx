@@ -49,7 +49,9 @@ function Governance() {
 
   return (
     <>
-      <h2 className="mb-6 text-2xl font-bold">{m.nav_governance()}</h2>
+      <h2 className="bg-linear-to-b from-foreground to-foreground bg-clip-text mb-6 pb-1 text-2xl font-semibold leading-tighter tracking-tighter text-transparent">
+        {m.nav_governance()}
+      </h2>
       <div className="flex flex-col gap-8">
         {isLoaded ? (
           <GovernanceProfile

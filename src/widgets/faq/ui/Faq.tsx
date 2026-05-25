@@ -23,7 +23,9 @@ export function Faq() {
 
   return (
     <>
-      <h2 className="mb-6 text-2xl font-bold">{m.nav_faq()}</h2>
+      <h2 className="bg-linear-to-b from-foreground to-foreground bg-clip-text mb-6 pb-1 text-2xl font-semibold leading-tighter tracking-tighter text-transparent">
+        {m.nav_faq()}
+      </h2>
       <div className="flex max-w-3xl flex-col gap-6">
         {faqKeys.map((key) => {
           const q = getFaqMessage(`${key}_q`);

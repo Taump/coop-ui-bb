@@ -81,7 +81,7 @@ function FeaturesSection() {
             <span className="text-primary font-mono text-sm uppercase">
               {m.how_it_works_label()}
             </span>
-            <h2 className="text-foreground mt-4 text-3xl font-semibold md:text-4xl">
+            <h2 className="bg-linear-to-b from-foreground to-foreground bg-clip-text mt-4 pb-1 text-3xl font-semibold leading-tighter tracking-tighter text-transparent md:text-4xl">
               {m.how_it_works_title()}
             </h2>
           </div>
