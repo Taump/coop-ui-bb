@@ -1,6 +1,11 @@
 import { describe, it, expect, vi, afterEach } from "vitest";
 import { formatPeriod } from "../formatPeriod";
 
+// Control the locale that formatPeriod reads. Defaults to "en" so the existing
+// assertions keep matching the English output; individual tests can switch it.
+const i18n = vi.hoisted(() => ({ locale: "en" }));
+vi.mock("#/shared/i18n", () => ({ getLocale: () => i18n.locale }));
+
 const NOW_SEC = 1700000000; // fixed "now" in seconds
 
 function mockNow() {
@@ -9,6 +14,7 @@ function mockNow() {
 
 afterEach(() => {
   vi.restoreAllMocks();
+  i18n.locale = "en";
 });
 
 describe("formatPeriod", () => {
@@ -105,6 +111,26 @@ describe("formatPeriod", () => {
       expect(formatPeriod(NOW_SEC + 5 * 60, { collapseDays: true })).toBe(
         "5 minutes",
       );
+    });
+  });
+
+  describe("localization", () => {
+    it("localizes units to the current locale (ru)", () => {
+      mockNow();
+      i18n.locale = "ru";
+      // collapseDays — the case from the vote list ("истекает через …")
+      expect(
+        formatPeriod(NOW_SEC + 39 * 86400, { collapseDays: true }),
+      ).toBe("39 дней");
+      // compound days + hours + minutes
+      expect(
+        formatPeriod(NOW_SEC + 3 * 86400 + 4 * 3600 + 12 * 60),
+      ).toBe("3 дня 4 ч 12 мин");
+      // singular day with correct Russian plural form
+      expect(formatPeriod(NOW_SEC + 86400)).toBe("1 день");
+      // standalone minutes / elapsed
+      expect(formatPeriod(NOW_SEC + 5 * 60)).toBe("5 минут");
+      expect(formatPeriod(NOW_SEC - 1)).toBe("0 минут");
     });
   });
 });
