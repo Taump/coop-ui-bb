@@ -8,28 +8,13 @@ import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 
 import { ogPrerender } from "./vite-og-prerender";
+import { paraglideCompilerOptions } from "./paraglide.config.mjs";
 
 const config = defineConfig({
   plugins: [
     ogPrerender(),
     devtools(),
-    paraglideVitePlugin({
-      project: "./project.inlang",
-      outdir: "./src/paraglide",
-      strategy: ["url", "cookie", "localStorage", "baseLocale"],
-      urlPatterns: [
-        {
-          pattern: "/:path(.*)?",
-          localized: [
-            ["zh", "/zh/:path(.*)?"],
-            ["es", "/es/:path(.*)?"],
-            ["ru", "/ru/:path(.*)?"],
-            ["uk", "/uk/:path(.*)?"],
-            ["en", "/:path(.*)?"],
-          ],
-        },
-      ],
-    }),
+    paraglideVitePlugin(paraglideCompilerOptions),
     tsconfigPaths({ projects: ["./tsconfig.json"] }),
     tailwindcss(),
     TanStackRouterVite({
