@@ -28,6 +28,7 @@ import { ReplaceForm } from "#/features/replace";
 import { ClaimRewardsDialog } from "#/features/claim-rewards";
 import { WithdrawDialog, isUnlockDatePassed } from "#/features/withdraw";
 import { ReferralLinkCard } from "#/features/referrals";
+import { ContributionsCard } from "#/widgets/contributions";
 
 export const Route = createFileRoute("/user/$address")({
   loader: async ({ params, context }) => {
@@ -168,6 +169,11 @@ function UserProfile() {
         <div className="col-span-6 lg:col-span-3">
           <VotesGivenList address={address} coopDecimals={coopDecimals} />
         </div>
+        <ContributionsCard
+          address={address}
+          isOwn={isYou}
+          className="col-span-6 lg:col-span-3"
+        />
       </div>
     </div>
   );

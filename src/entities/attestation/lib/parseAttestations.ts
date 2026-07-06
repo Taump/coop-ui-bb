@@ -39,6 +39,22 @@ function pickUsername(profile: RawAttestation["profile"] | null): string | null 
   return typeof username === "string" && username.length > 0 ? username : null;
 }
 
+function hasUserId(profile: RawAttestation["profile"]): boolean {
+  return profile.userId != null || profile.user_id != null;
+}
+
+// A user can hold several attestations from the same category (e.g. an old one
+// with only a username and a newer one that also carries the userId consumers
+// need for links and lookups). Keep the first match, but upgrade to a later
+// profile when it has a userId and the kept one doesn't.
+function merge(
+  current: RawAttestation["profile"] | null,
+  next: RawAttestation["profile"],
+): RawAttestation["profile"] {
+  if (!current) return next;
+  return !hasUserId(current) && hasUserId(next) ? next : current;
+}
+
 export function parseAttestations(raw: RawAttestation[]): ParsedAttestations {
   let telegram: ParsedAttestations["telegram"] = null;
   let discord: ParsedAttestations["discord"] = null;
@@ -47,10 +63,12 @@ export function parseAttestations(raw: RawAttestation[]): ParsedAttestations {
   for (const att of raw) {
     if (!telegram && tgSet.has(att.attestor_address)) {
       telegram = att.profile;
-    } else if (!discord && discordSet.has(att.attestor_address)) {
-      discord = att.profile;
-    } else if (!realName && realNameSet.has(att.attestor_address)) {
-      realName = att.profile;
+    } else if (discordSet.has(att.attestor_address)) {
+      discord = merge(discord, att.profile);
+    } else if (realNameSet.has(att.attestor_address)) {
+      realName = merge(realName, att.profile);
+    } else if (tgSet.has(att.attestor_address)) {
+      telegram = merge(telegram, att.profile);
     }
   }
 

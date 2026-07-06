@@ -12,6 +12,12 @@ export const env = createEnv({
       .optional()
       .transform((v) => v === "true"),
     VITE_OG_URL: z.url().optional(),
+    // Base URL of the contribution-log API; when unset, the Contributions
+    // block on the user page is not rendered at all.
+    VITE_CONTRIBUTION_LOG_URL: z.url().optional(),
+    // Discord forum channel URL (https://discord.com/channels/<guild>/<channel>);
+    // shown as a "Forum" link on the Contributions card when set.
+    VITE_DISCORD_FORUM_URL: z.url().optional(),
   },
 
   /**

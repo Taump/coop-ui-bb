@@ -160,6 +160,31 @@ describe("parseAttestations", () => {
     ]);
     expect(result.telegram).toEqual({ username: "first" });
   });
+
+  it("upgrades to a later profile that has a userId when the kept one doesn't", () => {
+    const result = parseAttestations([
+      { attestor_address: DISCORD_ATTESTOR, profile: { username: "old" } },
+      {
+        attestor_address: DISCORD_ATTESTOR,
+        profile: { username: "new", userId: "271281160175222785" },
+      },
+    ]);
+    expect(result.discord).toEqual({
+      username: "new",
+      userId: "271281160175222785",
+    });
+  });
+
+  it("keeps the first profile with a userId over a later one without", () => {
+    const result = parseAttestations([
+      {
+        attestor_address: DISCORD_ATTESTOR,
+        profile: { username: "full", userId: "111" },
+      },
+      { attestor_address: DISCORD_ATTESTOR, profile: { username: "bare" } },
+    ]);
+    expect(result.discord).toEqual({ username: "full", userId: "111" });
+  });
 });
 
 describe("emptyAttestations", () => {

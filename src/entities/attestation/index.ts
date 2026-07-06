@@ -10,3 +10,4 @@ export type {
 } from "./model/schemas";
 export { UserDisplayName } from "./ui/UserDisplayName";
 export { getProfileField } from "./lib/getProfileField";
+export { getDiscordUserId } from "./lib/getDiscordUserId";

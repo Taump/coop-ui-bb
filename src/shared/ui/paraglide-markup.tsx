@@ -4,23 +4,26 @@ import { Link } from "@tanstack/react-router";
 const linkClassName = "link";
 
 export const paraglideMarkup = {
+  // `to` is typed as unknown because Paraglide infers `{}` for variable
+  // options like {#link to=$url} — coerce to string at the boundary.
   link: ({
     children,
     options,
   }: {
     children?: ReactNode;
-    options: { to: string };
+    options: { to: unknown };
   }) => {
-    if (options.to.startsWith("/")) {
+    const to = String(options.to);
+    if (to.startsWith("/")) {
       return (
-        <Link to={options.to} className={linkClassName}>
+        <Link to={to} className={linkClassName}>
           {children}
         </Link>
       );
     }
     return (
       <a
-        href={options.to}
+        href={to}
         target="_blank"
         rel="noopener noreferrer"
         className={linkClassName}
