@@ -49,6 +49,7 @@
   "claim_rewards_will_lock": "You will lock",
   "claim_rewards_new_unlock_date": "New unlock date",
   "claim_rewards_submit_claim": "Claim",
+  "claim_rewards_submit_claim_and_lock": "Claim and Re-lock",
   "claim_rewards_submit_lock": "Lock",
   "claim_rewards_no_rewards": "No liquid rewards yet",
   "profile_withdraw": "Withdraw",

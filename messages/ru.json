@@ -49,6 +49,7 @@
   "claim_rewards_will_lock": "Вы заблокируете",
   "claim_rewards_new_unlock_date": "Новая дата разблокировки",
   "claim_rewards_submit_claim": "Забрать",
+  "claim_rewards_submit_claim_and_lock": "Забрать и снова заблокировать",
   "claim_rewards_submit_lock": "Заблокировать",
   "claim_rewards_no_rewards": "Ликвидных наград пока нет",
   "profile_withdraw": "Вывести",

@@ -147,7 +147,9 @@ export function ClaimRewardsForm({ user }: ClaimRewardsFormProps) {
       >
         {restakePercent === 0
           ? m.claim_rewards_submit_claim()
-          : m.claim_rewards_submit_lock()}
+          : restakePercent === 100
+            ? m.claim_rewards_submit_lock()
+            : m.claim_rewards_submit_claim_and_lock()}
       </QRButton>
     </div>
   );

@@ -49,6 +49,7 @@
   "claim_rewards_will_lock": "Bloquearás",
   "claim_rewards_new_unlock_date": "Nueva fecha de desbloqueo",
   "claim_rewards_submit_claim": "Reclamar",
+  "claim_rewards_submit_claim_and_lock": "Reclamar y volver a bloquear",
   "claim_rewards_submit_lock": "Bloquear",
   "claim_rewards_no_rewards": "Aún no hay recompensas líquidas",
   "profile_withdraw": "Retirar",
