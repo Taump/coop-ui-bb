@@ -25,21 +25,24 @@ served by a separate OG image service.
 
 ```bash
 pnpm install
-cp .env.example.testnet .env   # then edit if needed
+cp .env.example.testnet .env   # or .env.example.mainnet for production; edit if needed
 pnpm dev                       # http://localhost:4000
 ```
 
 ## Environment
 
-Variables are validated in `src/shared/config/env.ts`. Copy
-`.env.example.testnet` to `.env` to get started.
+Variables are validated in `src/shared/config/env.ts`. Ready-made examples:
+`.env.example.testnet` (local dev) and `.env.example.mainnet` (production).
+Copy one to `.env` to get started.
 
-| Var               | Required | Description                                            |
-| ----------------- | -------- | ------------------------------------------------------ |
-| `VITE_AA_ADDRESS` | yes      | 32-char COOP main AA address                           |
-| `VITE_TESTNET`    | no       | `true` for testnet, anything else for livenet          |
-| `VITE_OG_URL`     | no       | Base URL of the OG image service (used in OG `<meta>`)  |
-| `VITE_APP_TITLE`  | no       | Optional app title                                     |
+| Var                         | Required | Description                                                                                             |
+| --------------------------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| `VITE_AA_ADDRESS`           | yes      | 32-char COOP main AA address                                                                             |
+| `VITE_TESTNET`              | no       | `true` for testnet, anything else for livenet                                                            |
+| `VITE_OG_URL`               | no       | Base URL of the OG image service (used in OG `<meta>`)                                                   |
+| `VITE_CONTRIBUTION_LOG_URL` | no       | contribution-log API; unset hides the Contributions card. Origin is appended to CSP `connect-src` at build |
+| `VITE_DISCORD_FORUM_URL`    | no       | Discord forum channel URL — "Forum" link on the Contributions card                                       |
+| `VITE_APP_TITLE`            | no       | Optional app title                                                                                       |
 
 ## Scripts
 
