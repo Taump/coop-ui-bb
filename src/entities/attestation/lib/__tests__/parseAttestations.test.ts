@@ -185,6 +185,29 @@ describe("parseAttestations", () => {
     ]);
     expect(result.discord).toEqual({ username: "full", userId: "111" });
   });
+
+  it("upgrades an id-only profile to a later one that has both id and username", () => {
+    const result = parseAttestations([
+      { attestor_address: DISCORD_ATTESTOR, profile: { userId: "271" } },
+      {
+        attestor_address: DISCORD_ATTESTOR,
+        profile: { username: "taump", userId: "271" },
+      },
+    ]);
+    expect(result.discord).toEqual({ username: "taump", userId: "271" });
+    expect(result.displayName).toBe("taump");
+  });
+
+  it("keeps a profile that has both id and username over a later id-only one", () => {
+    const result = parseAttestations([
+      {
+        attestor_address: DISCORD_ATTESTOR,
+        profile: { username: "taump", userId: "271" },
+      },
+      { attestor_address: DISCORD_ATTESTOR, profile: { userId: "999" } },
+    ]);
+    expect(result.discord).toEqual({ username: "taump", userId: "271" });
+  });
 });
 
 describe("emptyAttestations", () => {

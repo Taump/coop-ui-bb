@@ -33,7 +33,9 @@ export function parseRawAttestations(value: unknown): RawAttestation[] {
   return out;
 }
 
-function pickUsername(profile: RawAttestation["profile"] | null): string | null {
+function pickUsername(
+  profile: RawAttestation["profile"] | null,
+): string | null {
   if (!profile) return null;
   const username = profile.username;
   return typeof username === "string" && username.length > 0 ? username : null;
@@ -43,16 +45,28 @@ function hasUserId(profile: RawAttestation["profile"]): boolean {
   return profile.userId != null || profile.user_id != null;
 }
 
+function hasUsername(profile: RawAttestation["profile"]): boolean {
+  return pickUsername(profile) != null;
+}
+
+// How complete an identity an attestation carries. A profile with BOTH a userId
+// and a username is the most useful (avatar lookup + display name + links), so
+// it must win over one that has only an id or only a username.
+function completeness(profile: RawAttestation["profile"]): number {
+  return (hasUserId(profile) ? 1 : 0) + (hasUsername(profile) ? 1 : 0);
+}
+
 // A user can hold several attestations from the same category (e.g. an old one
 // with only a username and a newer one that also carries the userId consumers
-// need for links and lookups). Keep the first match, but upgrade to a later
-// profile when it has a userId and the kept one doesn't.
+// need for links and lookups). Keep the first match, but upgrade to a strictly
+// more complete profile — an id-only or username-only slot is replaced by one
+// that has both.
 function merge(
   current: RawAttestation["profile"] | null,
   next: RawAttestation["profile"],
 ): RawAttestation["profile"] {
   if (!current) return next;
-  return !hasUserId(current) && hasUserId(next) ? next : current;
+  return completeness(next) > completeness(current) ? next : current;
 }
 
 export function parseAttestations(raw: RawAttestation[]): ParsedAttestations {
