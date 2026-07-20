@@ -163,17 +163,17 @@ function UserProfile() {
           </div>
         )}
 
+        <ContributionsCard
+          address={address}
+          isOwn={isYou}
+          className="col-span-6 lg:col-span-3 lg:row-span-2"
+        />
         <div className="col-span-6 lg:col-span-3">
           <VotesList address={address} coopDecimals={coopDecimals} />
         </div>
         <div className="col-span-6 lg:col-span-3">
           <VotesGivenList address={address} coopDecimals={coopDecimals} />
         </div>
-        <ContributionsCard
-          address={address}
-          isOwn={isYou}
-          className="col-span-6 lg:col-span-3"
-        />
       </div>
     </div>
   );
