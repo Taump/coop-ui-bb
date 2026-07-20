@@ -23,7 +23,10 @@ import { toLocalString } from "#/shared/lib/toLocalString";
 import { getVotesDivisor } from "#/entities/coop";
 import type { ParsedGovernanceParam } from "#/entities/governance";
 
-import { buildCommitLink, buildRemoveVoteLink } from "../lib/buildGovernanceLink";
+import {
+  buildCommitLink,
+  buildRemoveVoteLink,
+} from "../lib/buildGovernanceLink";
 import { Countdown } from "./Countdown";
 import { GovernanceVoteDialog } from "./GovernanceVoteDialog";
 import { ParamValue } from "./ParamValue";
@@ -137,38 +140,11 @@ export function GovernanceParamCard({
         </CardHeader>
 
         <CardContent className="flex-1 space-y-3 pb-3">
-          {userChoice !== undefined && (
-            <div className="flex items-center justify-between gap-2 text-sm">
-              <span className="text-muted-foreground">
-                {m.governance_param_your_vote()}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <span className="font-medium">
-                  <ParamValue
-                    value={userChoice}
-                    def={def}
-                    coopDecimals={coopDecimals}
-                    coopSymbol={coopSymbol}
-                  />
-                </span>
-                {removeVoteHref && (
-                  <QRButton
-                    href={removeVoteHref}
-                    size="xs"
-                    variant="link"
-                  >
-                    {m.governance_param_remove_vote()}
-                  </QRButton>
-                )}
-              </span>
-            </div>
-          )}
-
           {hasLeader && (
-            <div className="rounded-md bg-muted/50 p-2.5 text-sm">
-              <div className="flex items-center justify-between">
+            <div className="text-sm">
+              <div className="flex items-center gap-1.5">
                 <span className="text-muted-foreground">
-                  {m.governance_param_leader()}
+                  {m.governance_param_leader()}:
                 </span>
                 <span className="font-medium">
                   <ParamValue
@@ -178,36 +154,47 @@ export function GovernanceParamCard({
                     coopSymbol={coopSymbol}
                   />
                 </span>
+                {leaderDiffers && challengeExpired && (
+                  <QRButton
+                    href={commitHref ?? ""}
+                    disabled={!commitHref}
+                    size="xs"
+                    variant="link"
+                  >
+                    {m.governance_param_commit()}
+                  </QRButton>
+                )}
               </div>
-              {leaderDiffers && (
+              {leaderDiffers && !challengeExpired && challengingPeriodEndTs && (
                 <div className="mt-1 flex items-center justify-between">
-                  {challengeExpired ? (
-                    <>
-                      <span className="text-xs text-muted-foreground">
-                        {m.governance_param_ready_to_commit()}
-                      </span>
-                      <QRButton
-                        href={commitHref ?? ""}
-                        disabled={!commitHref}
-                        size="xs"
-                        variant="link"
-                      >
-                        {m.governance_param_commit()}
-                      </QRButton>
-                    </>
-                  ) : (
-                    challengingPeriodEndTs && (
-                      <>
-                        <span className="text-xs text-muted-foreground">
-                          {m.governance_param_challenge_ends_in()}
-                        </span>
-                        <span className="text-xs font-medium">
-                          <Countdown endTs={challengingPeriodEndTs} />
-                        </span>
-                      </>
-                    )
-                  )}
+                  <span className="text-xs text-muted-foreground">
+                    {m.governance_param_challenge_ends_in()}
+                  </span>
+                  <span className="text-xs font-medium">
+                    <Countdown endTs={challengingPeriodEndTs} />
+                  </span>
                 </div>
+              )}
+            </div>
+          )}
+
+          {userChoice !== undefined && (
+            <div className="flex items-center gap-1.5 text-sm">
+              <span className="text-muted-foreground">
+                {m.governance_param_your_vote()}:
+              </span>
+              <span className="font-medium">
+                <ParamValue
+                  value={userChoice}
+                  def={def}
+                  coopDecimals={coopDecimals}
+                  coopSymbol={coopSymbol}
+                />
+              </span>
+              {removeVoteHref && (
+                <QRButton href={removeVoteHref} size="xs" variant="link">
+                  {m.governance_param_remove_vote()}
+                </QRButton>
               )}
             </div>
           )}

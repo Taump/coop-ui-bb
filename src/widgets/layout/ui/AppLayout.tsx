@@ -9,6 +9,10 @@ interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   const isHome = useMatch({ from: "/", shouldThrow: false });
+  const isGovernance = useMatch({
+    from: "/governance",
+    shouldThrow: false,
+  });
 
   return (
     <div className="flex min-h-screen flex-col pt-14">
@@ -16,7 +20,13 @@ export function AppLayout({ children }: AppLayoutProps) {
       {isHome ? (
         <div className="flex-1">{children}</div>
       ) : (
-        <Container className="flex-1 pb-8 pt-8">{children}</Container>
+        <Container
+          className={
+            isGovernance ? "max-w-3xl flex-1 pb-8 pt-8" : "flex-1 pb-8 pt-8"
+          }
+        >
+          {children}
+        </Container>
       )}
       <Footer />
     </div>
