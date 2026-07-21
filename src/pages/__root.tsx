@@ -7,6 +7,7 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 
 import TanStackQueryProvider from "#/app/providers/query-provider";
+import { TooltipProvider } from "#/shared/ui/tooltip";
 import { AppLayout } from "#/widgets/layout";
 
 import TanStackQueryDevtools from "#/app/providers/query-devtools";
@@ -53,9 +54,13 @@ function RootLayout() {
   return (
     <TanStackQueryProvider>
       <HeadContent />
-      <AppLayout>
-        <Outlet />
-      </AppLayout>
+      {/* Single provider for the whole app: tooltips share one delay/skip
+          group, and leaf components mount only Tooltip itself. */}
+      <TooltipProvider>
+        <AppLayout>
+          <Outlet />
+        </AppLayout>
+      </TooltipProvider>
       <TanStackDevtools
         config={{
           position: "bottom-right",

@@ -12,12 +12,7 @@ import {
   attestationLinks,
 } from "#/shared/config/appConfig";
 import { ObyteServiceLinks } from "./ObyteServiceLinks";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shared/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shared/ui/tooltip";
 
 import { useWallet } from "#/entities/user";
 import { useAttestations, getProfileField } from "#/entities/attestation";
@@ -68,9 +63,11 @@ function interpolate(
 ): ReactNode[] {
   const markers = Object.keys(replacements);
   const pattern = new RegExp(`(${markers.map(escapeRegex).join("|")})`);
-  return template.split(pattern).map((part, i) => (
-    <Fragment key={i}>{replacements[part] ?? part}</Fragment>
-  ));
+  return template
+    .split(pattern)
+    .map((part, i) => (
+      <Fragment key={i}>{replacements[part] ?? part}</Fragment>
+    ));
 }
 
 export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
@@ -140,23 +137,21 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
             <h1 className="text-2xl font-semibold tracking-tight break-words sm:text-3xl md:text-5xl first-letter:uppercase">
               {displayName}
             </h1>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <VerifiedIcon
-                    className={`size-6 md:size-8 ${isEligible ? "text-blue-500" : "text-muted-foreground"}`}
-                  />
-                </TooltipTrigger>
-                <TooltipContent>
-                  {getEligibilityTooltip(
-                    hasBalance,
-                    hasLockPeriod,
-                    isYou,
-                    displayName,
-                  )}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <VerifiedIcon
+                  className={`size-6 md:size-8 ${isEligible ? "text-blue-500" : "text-muted-foreground"}`}
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                {getEligibilityTooltip(
+                  hasBalance,
+                  hasLockPeriod,
+                  isYou,
+                  displayName,
+                )}
+              </TooltipContent>
+            </Tooltip>
             {isYou && (
               <span className="rounded-sm bg-primary/10 px-1.5 py-0.5 text-xs font-medium text-primary">
                 {m.profile_badge_you()}
@@ -177,14 +172,12 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
       <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
         {tgUsername && (
           <div className="flex items-center gap-x-2">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <TelegramIcon />
-                </TooltipTrigger>
-                <TooltipContent>{m.profile_badge_telegram()}</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <TelegramIcon />
+              </TooltipTrigger>
+              <TooltipContent>{m.profile_badge_telegram()}</TooltipContent>
+            </Tooltip>
             <a
               href={getContactUrl(tgUsername, "telegram")}
               target="_blank"
@@ -198,14 +191,12 @@ export const ProfileHeader: FC<ProfileHeaderProps> = ({ address, user }) => {
 
         {discordUsername && (
           <div className="flex items-center gap-x-2">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger>
-                  <DiscordIcon />
-                </TooltipTrigger>
-                <TooltipContent>{m.profile_badge_discord()}</TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <DiscordIcon />
+              </TooltipTrigger>
+              <TooltipContent>{m.profile_badge_discord()}</TooltipContent>
+            </Tooltip>
             {(() => {
               const dcUrl = getContactUrl(
                 discordUsername,

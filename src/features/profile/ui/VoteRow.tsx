@@ -1,11 +1,6 @@
 import type { FC } from "react";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shared/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shared/ui/tooltip";
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { formatDateShort } from "#/shared/lib/formatDateShort";
 import { formatPeriod } from "#/shared/lib/formatPeriod";
@@ -61,30 +56,26 @@ export const VoteRow: FC<VoteRowProps> = ({
         {hasBadges && (
           <div className="flex shrink-0 items-center gap-2 sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:justify-self-end">
             {isSelfVote && (
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
-                      {m.vote_list_self()}
-                    </span>
-                  </TooltipTrigger>
-                  <TooltipContent>{m.vote_self()}</TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
+                    {m.vote_list_self()}
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent>{m.vote_self()}</TooltipContent>
+              </Tooltip>
             )}
             {typeof strength === "number" && (
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
-                      {m.vote_list_strength({ n: String(strength) })}
-                    </span>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    {m.vote_list_strength_tooltip()}
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <span className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
+                    {m.vote_list_strength({ n: String(strength) })}
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {m.vote_list_strength_tooltip()}
+                </TooltipContent>
+              </Tooltip>
             )}
           </div>
         )}

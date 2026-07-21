@@ -189,3 +189,4 @@ Project follows [FSD](https://feature-sliced.design/) structure under `src/`:
 - **`getContactUrl(username, resource, userId?)`** — Builds `https://t.me/...` or `https://discord.com/users/...` URLs. Use when rendering user contacts.
 - **`ogImageUrl(path)` / `ogImageMeta(path)`** — Resolves an OG image URL against `VITE_OG_URL` (the coop-og service) and produces `<meta>` tags. Use in route head metadata.
 - **`storageKey(key)`** — Prefixes localStorage keys with `testnet:` / `livenet:` so testnet and livenet state don't collide. Use for any persisted client state.
+- **`useExpired(endTs)`** — Hook: whether a unix timestamp (seconds) has passed, re-rendering the moment it does. Use instead of comparing `Date.now()` during render when UI is gated on a deadline (lock periods, challenging periods).

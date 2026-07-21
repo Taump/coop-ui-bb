@@ -5,12 +5,7 @@ import { Slider } from "#/shared/ui/slider";
 import { Label } from "#/shared/ui/label";
 import { Separator } from "#/shared/ui/separator";
 import { QRButton } from "#/shared/ui/qr-button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shared/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shared/ui/tooltip";
 
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { formatRounded } from "#/shared/lib/formatRounded";
@@ -67,18 +62,16 @@ export function ClaimRewardsForm({ user }: ClaimRewardsFormProps) {
     <div className="flex flex-col gap-4">
       <div className="grid gap-2 text-sm">
         <DetailRow label={m.claim_rewards_available()}>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <span className="font-medium text-foreground">
-                  {formatRounded(liquid, coopDecimals)} {coopSymbol}
-                </span>
-              </TooltipTrigger>
-              <TooltipContent>
-                {toLocalString(liquid)} {coopSymbol}
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span className="font-medium text-foreground">
+                {formatRounded(liquid, coopDecimals)} {coopSymbol}
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>
+              {toLocalString(liquid)} {coopSymbol}
+            </TooltipContent>
+          </Tooltip>
         </DetailRow>
       </div>
 

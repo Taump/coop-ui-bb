@@ -11,14 +11,11 @@ import {
   CardContent,
   CardFooter,
 } from "#/shared/ui/card";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shared/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shared/ui/tooltip";
 import { QRButton } from "#/shared/ui/qr-button";
+import { DisabledTooltip } from "#/shared/ui/disabled-tooltip";
 
+import { useExpired } from "#/shared/lib/useExpired";
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { getVotesDivisor } from "#/entities/coop";
 import type { ParsedGovernanceParam } from "#/entities/governance";
@@ -78,12 +75,14 @@ export function GovernanceParamCard({
     setSupportDialogOpen(true);
   };
 
+  const walletRequiredReason = address ? null : m.wallet_required_tooltip();
+
   const hasLeader = leader !== undefined;
   const leaderDiffers = hasLeader && String(leader) !== String(currentValue);
 
-  const now = Math.floor(Date.now() / 1000);
-  const challengeExpired =
-    challengingPeriodEndTs !== undefined && now >= challengingPeriodEndTs;
+  // Ticks on its own: Countdown re-renders only itself, so a snapshot taken
+  // here would keep the commit button hidden after the period runs out.
+  const challengeExpired = useExpired(challengingPeriodEndTs);
 
   const commitHref =
     leaderDiffers && challengeExpired && address
@@ -112,16 +111,14 @@ export function GovernanceParamCard({
               <CardTitle className="text-xl break-words">
                 {formatParamName(def.name)}
               </CardTitle>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="size-3.5 shrink-0 text-muted-foreground" />
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    <p className="text-xs">{getParamDescription(def.name)}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Info className="size-3.5 shrink-0 text-muted-foreground" />
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="text-xs">{getParamDescription(def.name)}</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
             <span className="text-sm">
               <span className="text-muted-foreground">
@@ -155,14 +152,22 @@ export function GovernanceParamCard({
                   />
                 </span>
                 {leaderDiffers && challengeExpired && (
-                  <QRButton
-                    href={commitHref ?? ""}
-                    disabled={!commitHref}
-                    size="xs"
-                    variant="link"
+                  // Disabled, both halves of the QRButton are pointer-events-none,
+                  // so its own QR tooltip stays silent and this one shows instead.
+                  <DisabledTooltip
+                    reason={walletRequiredReason}
+                    as="div"
+                    className="inline-flex"
                   >
-                    {m.governance_param_commit()}
-                  </QRButton>
+                    <QRButton
+                      href={commitHref ?? ""}
+                      disabled={!commitHref}
+                      size="xs"
+                      variant="link"
+                    >
+                      {m.governance_param_commit()}
+                    </QRButton>
+                  </DisabledTooltip>
                 )}
               </div>
               {leaderDiffers && !challengeExpired && challengingPeriodEndTs && (
@@ -236,13 +241,15 @@ export function GovernanceParamCard({
                         </button>
                       </td>
                       <td className="px-2 py-2 text-right sm:px-3">
-                        <button
-                          onClick={() => openDialog(s.valueKey)}
-                          disabled={!address}
-                          className="cursor-pointer text-xs font-medium link disabled:pointer-events-none disabled:opacity-50"
-                        >
-                          {m.governance_param_vote_for_value()}
-                        </button>
+                        <DisabledTooltip reason={walletRequiredReason}>
+                          <button
+                            onClick={() => openDialog(s.valueKey)}
+                            disabled={!address}
+                            className="cursor-pointer text-xs font-medium link disabled:pointer-events-none disabled:opacity-50"
+                          >
+                            {m.governance_param_vote_for_value()}
+                          </button>
+                        </DisabledTooltip>
                       </td>
                     </tr>
                   ))}
@@ -253,13 +260,15 @@ export function GovernanceParamCard({
         </CardContent>
 
         <CardFooter className="pt-0">
-          <button
-            onClick={() => openDialog()}
-            disabled={!address}
-            className="cursor-pointer text-sm font-medium link disabled:pointer-events-none disabled:opacity-50"
-          >
-            {m.governance_param_suggest_value()}
-          </button>
+          <DisabledTooltip reason={walletRequiredReason}>
+            <button
+              onClick={() => openDialog()}
+              disabled={!address}
+              className="cursor-pointer text-sm font-medium link disabled:pointer-events-none disabled:opacity-50"
+            >
+              {m.governance_param_suggest_value()}
+            </button>
+          </DisabledTooltip>
         </CardFooter>
       </Card>
 

@@ -7,12 +7,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "./popover";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 
 interface WalletProtocolPopoverProps {
   open: boolean;
@@ -29,16 +24,14 @@ export function WalletProtocolPopover({
 }: WalletProtocolPopoverProps) {
   return (
     <Popover open={open} onOpenChange={onOpenChange}>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <PopoverTrigger asChild>{children}</PopoverTrigger>
-          </TooltipTrigger>
-          <TooltipContent className="max-w-[250px]">
-            <p>{m.wallet_popover_tooltip()}</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <PopoverTrigger asChild>{children}</PopoverTrigger>
+        </TooltipTrigger>
+        <TooltipContent className="max-w-[250px]">
+          <p>{m.wallet_popover_tooltip()}</p>
+        </TooltipContent>
+      </Tooltip>
       <PopoverContent
         side="bottom"
         className="border-white bg-white text-sm text-black shadow-lg"

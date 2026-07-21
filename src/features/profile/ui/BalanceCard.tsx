@@ -5,12 +5,7 @@ import { Info } from "lucide-react";
 import { Card, CardContent, CardTitle } from "#/shared/ui/card";
 import { Collapsible, CollapsibleContent } from "#/shared/ui/collapsible";
 import { Separator } from "#/shared/ui/separator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shared/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shared/ui/tooltip";
 import { Amount } from "#/shared/ui/amount";
 import { DetailRow } from "#/shared/ui/detail-row";
 
@@ -80,21 +75,19 @@ export const BalanceCard: FC<BalanceCardProps> = ({
           <CardTitle className="flex items-center gap-1.5">
             {m.profile_balance_title()}
             {ceilingPriceFormatted !== null && (
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="size-3.5 text-muted-foreground" />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    {m.profile_balance_title_tooltip({
-                      coopSymbol,
-                      gbyteSymbol,
-                      gbyteShare,
-                      ceilingPrice: ceilingPriceFormatted,
-                    })}
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Info className="size-3.5 text-muted-foreground" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  {m.profile_balance_title_tooltip({
+                    coopSymbol,
+                    gbyteSymbol,
+                    gbyteShare,
+                    ceilingPrice: ceilingPriceFormatted,
+                  })}
+                </TooltipContent>
+              </Tooltip>
             )}
           </CardTitle>
           {action}

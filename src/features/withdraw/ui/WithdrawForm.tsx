@@ -2,12 +2,7 @@ import { useRef } from "react";
 
 import { Separator } from "#/shared/ui/separator";
 import { QRButton } from "#/shared/ui/qr-button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shared/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shared/ui/tooltip";
 
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { formatRounded } from "#/shared/lib/formatRounded";
@@ -63,39 +58,37 @@ export function WithdrawForm({ user }: WithdrawFormProps) {
       <Separator />
 
       <div className="grid gap-2 text-sm">
-        <span className="text-muted-foreground">{m.withdraw_will_receive()}</span>
+        <span className="text-muted-foreground">
+          {m.withdraw_will_receive()}
+        </span>
         {coopAtomic > 0 && (
           <div className="flex justify-between">
             <span className="text-muted-foreground">{coopSymbol}</span>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span className="font-medium text-foreground">
-                    {formatRounded(coop, coopDecimals)}
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent>
-                  {toLocalString(coop)} {coopSymbol}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="font-medium text-foreground">
+                  {formatRounded(coop, coopDecimals)}
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>
+                {toLocalString(coop)} {coopSymbol}
+              </TooltipContent>
+            </Tooltip>
           </div>
         )}
         {gbyteAtomic > 0 && (
           <div className="flex justify-between">
             <span className="text-muted-foreground">{gbyteSymbol}</span>
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span className="font-medium text-foreground">
-                    {formatRounded(gbyte, gbyteDecimals)}
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent>
-                  {toLocalString(gbyte)} {gbyteSymbol}
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <span className="font-medium text-foreground">
+                  {formatRounded(gbyte, gbyteDecimals)}
+                </span>
+              </TooltipTrigger>
+              <TooltipContent>
+                {toLocalString(gbyte)} {gbyteSymbol}
+              </TooltipContent>
+            </Tooltip>
           </div>
         )}
       </div>

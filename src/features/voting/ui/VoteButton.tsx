@@ -10,12 +10,7 @@ import {
   PopoverTitle,
 } from "#/shared/ui/popover";
 import { Separator } from "#/shared/ui/separator";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shared/ui/tooltip";
+import { DisabledTooltip } from "#/shared/ui/disabled-tooltip";
 import { env } from "#/shared/config/env";
 import { cn } from "#/shared/lib/utils";
 import { openCustomProtocol } from "#/shared/lib/openCustomProtocol";
@@ -132,83 +127,28 @@ export const VoteButton: FC<VoteButtonProps> = ({ address }) => {
     [mainAa, address, connectedAddress, vars],
   );
 
-  if (!connectedAddress) {
-    return (
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <span>
-              <Button variant="outline" disabled>
-                {m.vote_button()}
-                <ChevronDown className="ml-1 size-4" />
-              </Button>
-            </span>
-          </TooltipTrigger>
-          <TooltipContent>{m.vote_connect_wallet()}</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    );
-  }
-
-  if (isSelf) {
-    return (
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <span>
-              <Button variant="outline" disabled>
-                {m.vote_button()}
-                <ChevronDown className="ml-1 size-4" />
-              </Button>
-            </span>
-          </TooltipTrigger>
-          <TooltipContent>{m.vote_self()}</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    );
-  }
-
-  if (!voterEligible) {
-    return (
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <span>
-              <Button variant="outline" disabled>
-                {m.vote_button()}
-                <ChevronDown className="ml-1 size-4" />
-              </Button>
-            </span>
-          </TooltipTrigger>
-          <TooltipContent>
-            {getVoterIneligibleTooltip(voterHasBalance, voterHasLockPeriod)}
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    );
-  }
-
-  if (!recipientEligible) {
-    return (
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <span>
-              <Button variant="outline" disabled>
-                {m.vote_button()}
-                <ChevronDown className="ml-1 size-4" />
-              </Button>
-            </span>
-          </TooltipTrigger>
-          <TooltipContent>
-            {getRecipientIneligibleTooltip(
+  const disabledReason = !connectedAddress
+    ? m.wallet_required_tooltip()
+    : isSelf
+      ? m.vote_self()
+      : !voterEligible
+        ? getVoterIneligibleTooltip(voterHasBalance, voterHasLockPeriod)
+        : !recipientEligible
+          ? getRecipientIneligibleTooltip(
               recipientHasBalance,
               recipientHasLockPeriod,
               recipientName,
-            )}
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+            )
+          : null;
+
+  if (disabledReason) {
+    return (
+      <DisabledTooltip reason={disabledReason}>
+        <Button variant="outline" disabled>
+          {m.vote_button()}
+          <ChevronDown className="ml-1 size-4" />
+        </Button>
+      </DisabledTooltip>
     );
   }
 

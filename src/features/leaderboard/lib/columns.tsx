@@ -6,12 +6,7 @@ import * as m from "#/paraglide/messages";
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { getVotesDivisor } from "#/entities/coop";
 import { useAttestations } from "#/entities/attestation";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shared/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shared/ui/tooltip";
 import type { LeaderboardUser } from "#/entities/coop";
 
 interface GetColumnsOptions {
@@ -100,21 +95,19 @@ export function getColumns({
           }}
         >
           {m.leaderboard_col_balance()}
-          <TooltipProvider>
-            <Tooltip>
-              {/* The icon explains the column; its clicks must not reach the
+          <Tooltip>
+            {/* The icon explains the column; its clicks must not reach the
                   sort button, or reading the tooltip re-sorts the table. */}
-              <TooltipTrigger
-                asChild
-                onClick={(event) => event.stopPropagation()}
-              >
-                <Info className="ml-1 inline size-3.5 text-muted-foreground" />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{m.leaderboard_balance_tooltip()}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+            <TooltipTrigger
+              asChild
+              onClick={(event) => event.stopPropagation()}
+            >
+              <Info className="ml-1 inline size-3.5 text-muted-foreground" />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{m.leaderboard_balance_tooltip()}</p>
+            </TooltipContent>
+          </Tooltip>
           <SortIcon isSorted={column.getIsSorted()} />
         </button>
       ),
@@ -122,19 +115,17 @@ export function getColumns({
         const { balance, bytes_balance, total_balance } = row.original;
 
         return (
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger className="cursor-default border-b border-dashed border-muted-foreground pb-0.5">
-                {toLocalString(total_balance / coopDivisor)} {coopSymbol}
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>
-                  {toLocalString(balance / coopDivisor)} {coopSymbol} +{" "}
-                  {toLocalString(bytes_balance / gbyteDivisor)} GBYTE
-                </p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className="cursor-default border-b border-dashed border-muted-foreground pb-0.5">
+              {toLocalString(total_balance / coopDivisor)} {coopSymbol}
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>
+                {toLocalString(balance / coopDivisor)} {coopSymbol} +{" "}
+                {toLocalString(bytes_balance / gbyteDivisor)} GBYTE
+              </p>
+            </TooltipContent>
+          </Tooltip>
         );
       },
     },

@@ -1,11 +1,6 @@
 import type { FC } from "react";
 
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shared/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shared/ui/tooltip";
 
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { formatRounded } from "#/shared/lib/formatRounded";
@@ -25,15 +20,13 @@ export const Amount: FC<AmountProps> = ({ value, decimals, symbol }) => {
   }
 
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <span>{rounded}</span>
-        </TooltipTrigger>
-        <TooltipContent>
-          {exact} {symbol}
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <span>{rounded}</span>
+      </TooltipTrigger>
+      <TooltipContent>
+        {exact} {symbol}
+      </TooltipContent>
+    </Tooltip>
   );
 };

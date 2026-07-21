@@ -4,12 +4,7 @@ import { Info } from "lucide-react";
 import * as m from "#/paraglide/messages";
 
 import { Card, CardContent } from "#/shared/ui/card";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "#/shared/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "#/shared/ui/tooltip";
 import { toLocalString } from "#/shared/lib/toLocalString";
 import { getExplorerUrl } from "#/shared/lib/getExplorerUrl";
 import { useWallet } from "#/entities/user";
@@ -63,18 +58,16 @@ export function GovernanceProfile({ connectWallet }: GovernanceProfileProps) {
               <span className="text-muted-foreground">
                 {m.governance_profile_balance()}
               </span>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="size-3.5 text-muted-foreground" />
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    <p className="text-xs">
-                      {m.governance_profile_balance_tooltip()}
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Info className="size-3.5 text-muted-foreground" />
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="text-xs">
+                    {m.governance_profile_balance_tooltip()}
+                  </p>
+                </TooltipContent>
+              </Tooltip>
             </div>
             <span className="font-medium">
               {toLocalString(totalBalance / coopDivisor)} {coopSymbol}
@@ -85,18 +78,16 @@ export function GovernanceProfile({ connectWallet }: GovernanceProfileProps) {
               <span className="text-muted-foreground">
                 {m.governance_profile_voting_power()}
               </span>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="size-3.5 text-muted-foreground" />
-                  </TooltipTrigger>
-                  <TooltipContent className="max-w-xs">
-                    <p className="text-xs">
-                      {m.governance_profile_voting_power_tooltip()}
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Info className="size-3.5 text-muted-foreground" />
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p className="text-xs">
+                    {m.governance_profile_voting_power_tooltip()}
+                  </p>
+                </TooltipContent>
+              </Tooltip>
             </div>
             <span className="font-medium">{toLocalString(votingPower)}</span>
           </div>

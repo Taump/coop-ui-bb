@@ -13,12 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";
 import { WalletProtocolPopover } from "./wallet-protocol-popover";
 
 type QRButtonProps = React.ComponentProps<typeof Button> & {
@@ -45,29 +40,27 @@ export const QRButton = forwardRef<HTMLButtonElement, QRButtonProps>(
     return (
       <div className={cn("flex", className)}>
         <Dialog>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <DialogTrigger asChild>
-                  <Button
-                    {...props}
-                    variant={variant}
-                    tabIndex={-1}
-                    disabled={disabled}
-                    className={cn(
-                      "rounded-br-none rounded-tr-none",
-                      variant === "link" ? "px-1" : "px-3",
-                    )}
-                  >
-                    <QrCode className="size-4" />
-                  </Button>
-                </DialogTrigger>
-              </TooltipTrigger>
-              <TooltipContent className="max-w-[250px]">
-                <p>{m.qr_tooltip()}</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <DialogTrigger asChild>
+                <Button
+                  {...props}
+                  variant={variant}
+                  tabIndex={-1}
+                  disabled={disabled}
+                  className={cn(
+                    "rounded-br-none rounded-tr-none",
+                    variant === "link" ? "px-1" : "px-3",
+                  )}
+                >
+                  <QrCode className="size-4" />
+                </Button>
+              </DialogTrigger>
+            </TooltipTrigger>
+            <TooltipContent className="max-w-[250px]">
+              <p>{m.qr_tooltip()}</p>
+            </TooltipContent>
+          </Tooltip>
 
           <DialogContent className="sm:max-w-[360px]">
             <DialogHeader className="mb-4 w-full text-center">
